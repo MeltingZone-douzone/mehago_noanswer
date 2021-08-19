@@ -1,0 +1,37 @@
+.Guestbook__List__Item {
+    width:100%;
+    margin-top:20px;
+    background-position: 0;
+    background-repeat: no-repeat;
+    padding-left:50px;
+    position:relative;
+
+    strong, a {
+        text-align: left;
+        display:block;
+    }
+    strong {
+        color:#aaa;
+    }
+    p {
+        text-align: left;
+        width:465px;
+        padding:10px;
+        margin:5px 0;
+        border:1px solid #EAECEC;
+        background-color: #FAFAFA;
+        line-height:1.75em;
+        border-radius:4px;
+    }
+    a {
+        position:absolute;
+        width:20px;
+        height:20px;
+        font-size:0;
+        background-position: 0;
+        background-repeat: no-repeat;
+        left:20px;
+        top:40px;
+        outline:none;
+    }
+}

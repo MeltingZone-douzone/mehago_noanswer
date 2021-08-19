@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: "Lato", sans-serif;
+    line-height: 1;
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+  body {
+    background: rgb(250, 250, 250);
+    min-width: auto;
+  }
+  .data_reactroot {
+    height: 100%;
+  }
+  .login_wrap {
+    background: rgb(250, 250, 250);
+  
+    .respond_container {
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 15px;
+      padding-right: 15px;
+  
+      .nav_header {
+        display: block;
+        border-bottom: 0;
+      }
+    }
+    .nav,
+    .respond_container > .nav_header {
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+    .btn_toggle {
+      float: left;
+      margin: 14px 0 9px 5px;
+      padding: 9px 10px;
+      border: 0;
+      background-color: transparent;
+      cursor: pointer;
+    }
+    .logo {
+      text-align: center;
+      a {
+        display: inline-block;
+        margin-left: 20px;
+        line-height: 80px;
+      }
+      img {
+        vertical-align: middle;
+      }
+    }
+  
+    .content_box {
+      background-color: #fff;
+      width: 600px;
+      margin: 50px auto 0;
+      padding: 0 35px;
+      border: 1px solid #9297a4;
+      border-radius: 10px;
+    }
+  
+    .login_form {
+      padding: 60px 40px 80px;
+      .info_text {
+        padding-bottom: 20px;
+        font-size: 15px;
+        line-height: 22px;
+        letter-spacing: -1px;
+        text-align: center;
+        word-break: keep-all;
+      }
+      h2 {
+        padding: 20px 0 15px;
+        font-size: 30px;
+        text-align: center;
+      }
+      .input_field,
+      .password_field {
+        width: 100%;
+        margin-top: 10px;
+        div {
+          position: relative;
+          margin: 0px;
+          padding: 11px 0px 11px 16px;
+          border: 1px solid rgb(204, 204, 204);
+          background: rgb(255, 255, 255);
+          height: 24px;
+          line-height: 19px;
+        }
+      }
+      .input_id,
+      .input_password {
+        display: block;
+        vertical-align: top;
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+        border: 0px none;
+        background: transparent;
+        color: rgb(26, 26, 26);
+        font-size: 18px;
+        font-family: 돋움, Dotum, Helvetica, "Apple SD Gothic Neo", sans-serif;
+        cursor: auto;
+        outline: none;
+        line-height: 24px;
+      }
+      .wrong {
+        margin: 6px 0px 0px 5px;
+        color: "rgb(141, 141, 141)";
+        font-size: 14px;
+        font-family: 돋움, Dotum, Helvetica, Apple SD Gothic Neo, sans-serif;
+      }
+      .login_button {
+        box-sizing: border-box;
+        cursor: pointer;
+        display: inline-block;
+        outline: none;
+        position: relative;
+        text-align: center;
+        vertical-align: top;
+        border-radius: 0px;
+        border: 1px solid rgb(28, 144, 251);
+        background: rgb(28, 144, 251);
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        font-size: 22px;
+        font-family: "Nanum Square", 돋움, Dotum, Helvetica, "Apple SD Gothic Neo",
+          sans-serif;
+        height: 66px;
+        line-height: initial;
+        padding: 0px 20px;
+        width: 100%;
+        margin-top: 33px;
+        font-weight: 200;
+      }
+    }
+  }
+  
+  .header {
+    position: relative;
+    width: 100%;
+    min-height: 60px;
+    background-color: #333948;
+  }
+  
+  .login_wrap .login_info {
+    margin-top: 42px;
+    padding-top: 12px;
+    border-top: 1px solid #d9d9d9;
+    text-align: center;
+    ul {
+      display: inline-block;
+      float: left;
+  
+      li {
+        float: left;
+        position: relative;
+  
+        &:first-child {
+          margin-left: 0;
+          padding-left: 0;
+        }
+  
+        a {
+          color: #8d8d8d;
+          font-size: 14px;
+          text-decoration: none;
+        }
+      }
+    }
+    .member_join {
+      font-size: 14px;
+      color: #8d8d8d;
+      text-decoration: none;
+      float: right;
+    }
+  }

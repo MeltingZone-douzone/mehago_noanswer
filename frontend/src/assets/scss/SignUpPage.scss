@@ -1,0 +1,37 @@
+.MainPageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  box-sizing: border-box;
+  .InitialView {
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    display: block;
+    flex-shrink: 0;
+    margin: auto;
+    min-height: 0;
+    transition: 0.2s;
+    width: 450px;
+  }
+  .ContentWrapper {
+    height: auto;
+    min-height: 500px;
+    overflow-y: auto;
+    transition: 0.2s;
+    padding: 48px 40px 36px;
+    flex-grow: 1;
+  }
+  .LogoWrapper {
+    display: flex;
+    height: 24px;
+    justify-content: center;
+  }
+  .Logo {
+    height: 24px;
+    margin: 0 0;
+    overflow: visible;
+    position: relative;
+    width: 75px;
+  }
+}

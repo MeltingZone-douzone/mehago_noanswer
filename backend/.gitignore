@@ -1,0 +1,8 @@
+# backend's bulk
+/logs
+/multer-temporary-store
+**/upload-images
+
+# frontend's bundle target
+**/main.js
+**/bundle.js

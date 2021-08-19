@@ -1,0 +1,26 @@
+.Guestbook__DeleteForm	{ 
+    height:200px;
+
+    form {
+        width:300px;
+        padding:10px;
+        border:1px solid #666;
+        border-radius: 10px;
+        margin:50px auto;
+    }
+    
+    a { 
+        display:block; 
+        margin:20px auto; 
+        width:110px;
+    }
+    
+    input[type="password"] {
+        margin-top:5px;
+        width:284px;
+    }
+
+    input[type="submit"] {
+        width:296px;
+    }
+}
