@@ -3,6 +3,7 @@ package com.douzone.mehago.controller;
 import javax.crypto.spec.SecretKeySpec;
 
 import com.douzone.mehago.service.AccountService;
+import com.douzone.mehago.utils.AES;
 import com.douzone.mehago.vo.Account;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Encryption;
@@ -26,15 +27,20 @@ public class AccountController {
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@RequestBody Account account) {
         // accountService.signUp(account);
-
         return ResponseEntity.ok().build();
     }
 
-
-    @GetMapping("get-user")
+    // 암호화 테스트용.. localhost:9999/profile하면 볼 수 있음.
+    @GetMapping("/get-user")
     public void getUser() {
+        String secretKey = "Peach";
+        String originalString = "asd003786!";
 
+        String encryptedString = AES.encrypt(originalString, secretKey);
+        String decryptedString = AES.decrypt(encryptedString, secretKey);
 
+        System.out.println(encryptedString);
+        System.out.println(decryptedString);
     }
     
 
