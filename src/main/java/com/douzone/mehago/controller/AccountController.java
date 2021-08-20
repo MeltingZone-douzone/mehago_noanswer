@@ -4,6 +4,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import com.douzone.mehago.service.AccountService;
 import com.douzone.mehago.utils.AES;
+import com.douzone.mehago.utils.JwtDecoder;
+import com.douzone.mehago.utils.JwtTokenUtil;
 import com.douzone.mehago.vo.Account;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Encryption;
@@ -22,6 +24,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountController {
     
+    private final JwtTokenUtil jwtTokenUtil;
+    private final JwtDecoder jwtDecoder;
     private final AccountService accountService;
 
     @PostMapping("/sign-up")
@@ -33,14 +37,26 @@ public class AccountController {
     // 암호화 테스트용.. localhost:9999/profile하면 볼 수 있음.
     @GetMapping("/get-user")
     public void getUser() {
-        String secretKey = "Peach";
-        String originalString = "asd003786!";
+        // String secretKey = "Peach";
+        // String originalString = "asd003786!";
 
-        String encryptedString = AES.encrypt(originalString, secretKey);
-        String decryptedString = AES.decrypt(encryptedString, secretKey);
+        // String encryptedString = AES.encrypt(originalString, secretKey);
+        // String decryptedString = AES.decrypt(encryptedString, secretKey);
 
-        System.out.println(encryptedString);
-        System.out.println(decryptedString);
+        // System.out.println(encryptedString);
+        // System.out.println(decryptedString);
+
+        Account account =  new Account();
+        account.setNo(2L);
+        account.setNickname("nickname");
+
+
+        String token = jwtTokenUtil.generateToken(account);
+        System.out.println(token);
+
+        Account validAccount = jwtDecoder.decodeJwt(token);
+
+        System.out.println(validAccount.toString());
     }
     
 
