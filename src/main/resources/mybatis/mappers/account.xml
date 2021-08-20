@@ -5,7 +5,7 @@
 
 <mapper namespace="account">
 
-	<insert id="insert" parameterType="account">
+	<insert id="insert" parameterType="accountvo">
 		<![CDATA[
 			insert 
 				into account 
@@ -13,7 +13,7 @@
 		]]>
 	</insert>
 
-	<select id="findById" parameterType="Long" resultType="account">
+	<select id="findById" parameterType="Long" resultType="accountvo">
 		<![CDATA[
 			select id, email, name, gender
 				from account
@@ -21,7 +21,7 @@
 		]]>
 	</select>
 
-	<update id="updateNickname" parameterType="account">
+	<update id="updateNickname" parameterType="accountvo">
 		<![CDATA[
 		    update account
 		    set nickname=#{nickname }
@@ -29,7 +29,7 @@
 		]]>
 	</update>
 
-    <update id="updatePassword" parameterType="account">
+    <update id="updatePassword" parameterType="accountvo">
 		<![CDATA[
 		    update account
 		    set password=#{password}
@@ -37,7 +37,7 @@
 		]]>
 	</update>
 
-    <update id="updateUserInfo" parameterType="account">
+    <update id="updateUserInfo" parameterType="accountvo">
 		<![CDATA[
 		    update account
 		    set name=#{name },
@@ -46,18 +46,8 @@
 		]]>
 	</update>
 
-	<select id="findByEmailAndPassword" parameterType="account"
-		resultType="account">
-		<![CDATA[
-		select no
-		  from account 
-		 where email = #{email } 
-		   and password = #{password } 
-		   ]]>
-	</select>
-
 	<select id="searchAccount" parameterType="map"
-		resultType="account">
+		resultType="accountvo">
 		<![CDATA[
 			select email, password
 				from account 
@@ -67,7 +57,7 @@
 	</select>
 
 	<select id="searchEmail" parameterType="map"
-		resultType="account">
+		resultType="accountvo">
 		<![CDATA[
 			select email
 				from account 
@@ -83,15 +73,5 @@
 			    where email=#{email }
 		]]>
 	</update>
-
-	<select id="findByEmailAndPassword" parameterType="map"
-		resultType="account">
-		<![CDATA[
-			select no
-				from account 
-				where name = #{name} 
-				and phone_number = #{phoneNumber}
-		]]>
-	</select>
 
 </mapper>
