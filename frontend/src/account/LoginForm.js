@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import styles from "../assets/sass/account/LoginForm.scss";
 
 export default function LoginForm() {
-
   const [memberVo, setMemberVo] = useState({ id: "", password: "" });
   const [loginFail, setLoginFail] = useState(false);
 
@@ -12,27 +11,32 @@ export default function LoginForm() {
     e.preventDefault();
     try {
       axios
-        .post("/spring/account/api/login", memberVo, { headers: {} })
+        .post("/api/account/login", memberVo, {
+          headers: {
+            ContentType: "application/json",
+            Accept: "application/json",
+          },
+        })
         .then((res) => {
           if (res.data.result == "success") {
-            console.log("와!");
+            console.log(res.data);
+            if (res.data.data === "cant find account") {
+              // 틀렸을 경우에
+              setLoginFail(true);
+              setMemberVo({ ...memberVo, password: "" });
+            } // 성공하면 메인화면 가기
           }
         });
-      // 성공하면 옆으로...
-
-      // 틀렸을 경우에
-      setLoginFail(true);
-      setMemberVo(...memberVo,{password:""});
-
     } catch (err) {
-      next(err);
+      console.error(err);
     }
   };
   const handleChange = (e) => {
-      const { name, value } = e.target;
-      setMemberVo(...memberVo,{[name] : value});
+    const { name, value } = e.target;
+    console.log(name, value);
+    setMemberVo({ ...memberVo, [name]: value });
   };
-  
+
   return (
     <div className={styles.LoginForm}>
       <div className={styles.Message}>
