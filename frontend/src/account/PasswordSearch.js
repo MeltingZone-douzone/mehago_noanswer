@@ -5,14 +5,14 @@ import styles from "../assets/sass/account/LoginForm.scss";
 import axios from 'axios';
 
 export default function PasswordSearch(){
-
-    const [user, setUser] = useState({name:"", email:""});
+    const [accounts, setAccount] = useState({name:"", email:""});
+    const [sendMassege, setSendMassege] = useState("");
 
     const onChangeUserInput = (e)=>{
         const {name, value } = e.target;
         console.log(name ,":", value);
-        setUser({
-            ...user,
+        setAccount({
+            ...accounts,
             [name]:value}
         );
     }
@@ -20,14 +20,22 @@ export default function PasswordSearch(){
     const emailSend = () => {
         console.log("보내기");
         try {
-            const url = `/spring/user/search`;
+            const url = `/api/account/findByNameAndEmail`;
             const account = {
-                name : user.name,
-                email : user.email
+                name : accounts.name,
+                email : accounts.email
             }
 
             axios.post(url, account , {headers:{'Context-Type': 'application/json'}})
-                .then(res => console.log(res));
+                .then(res => {
+                    if(res.data.data == true){
+                        setSendMassege(true);
+                    } else {
+                        setSendMassege(false);
+                    }
+            });
+            setAccount({name: "", email:""});
+
             
         } catch (e) {
             console.log(e);
@@ -52,7 +60,7 @@ export default function PasswordSearch(){
                     size="medium"
                     autoComplete="off"
                     name="name"
-                    value={user.name} 
+                    value={accounts.name} 
                     onChange={(e) => {onChangeUserInput(e)}}
                     />
                 </div>
@@ -65,16 +73,24 @@ export default function PasswordSearch(){
                         variant="outlined"
                         size="medium"
                         name="email"
-                        value={user.email} 
+                        value={accounts.email} 
                         onChange={(e) => {onChangeUserInput(e)}}/>
                 </div>
+                {sendMassege === false ? (
+                    <div className={styles.LoginFail} name="loginFail">
+                        <span>가입되지 않은 이름거나, 잘못된 이메일 입니다.</span>
+                    </div>
+                    ) : (
+                    <div className={styles.LoginFail} name="loginFail">
+                        <span>입력하신 이메일로 임시 비밀번호가 전송되었습니다.</span>
+                    </div>
+                )}
                 <div className={styles.LoginButton}>
                     <Button
                         className={styles.LoginBtn}
                         variant="contained"
                         color="primary"
                         size="large"
-                        type="submit"
                         onClick={emailSend}
                     >
                         보내기

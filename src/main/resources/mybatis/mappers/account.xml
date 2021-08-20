@@ -46,4 +46,42 @@
 		]]>
 	</update>
 
+	<select id="searchAccount" parameterType="map"
+		resultType="accountvo">
+		<![CDATA[
+			select email, password
+				from account 
+				where name = #{name} 
+				and email = #{email}
+		]]>
+	</select>
+
+	<select id="searchEmail" parameterType="map"
+		resultType="accountvo">
+		<![CDATA[
+			select email
+				from account 
+				where name = #{name} 
+				and phone_number = #{phoneNumber}
+		]]>
+	</select>
+
+	<update id="updateRendomPassword" parameterType="map">
+		<![CDATA[
+			update account
+			    set password=#{randomPassword }
+			    where email=#{email }
+		]]>
+	</update>
+
+	<select id="findByEmailAndPassword" parameterType="map"
+		resultType="accountvo">
+		<![CDATA[
+			select no
+				from account 
+				where name = #{name} 
+				and phone_number = #{phoneNumber}
+		]]>
+	</select>
+
 </mapper>

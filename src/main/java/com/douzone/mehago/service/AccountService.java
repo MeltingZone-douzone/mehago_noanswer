@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountService {
 
-
     private final AccountRepository accountRepository;
 
     public void updateNickname(Account account) {
@@ -34,6 +33,23 @@ public class AccountService {
 
     public void signUp(Account account) {
         accountRepository.signUp(account);
+    }
+
+    public Account searchAccount(String name, String email){
+        return accountRepository.searchAccount(name, email);
+    }
+
+    public Account searchEmail(String name, String phoneNumber){
+        return accountRepository.searchEmail(name, phoneNumber);
+    }
+
+    public void changeRandomPassword(String randomPassword, String email){
+        accountRepository.updateRendomPassword(randomPassword, email);
+    }
+
+
+    public Account getAccount(String email, String password) {
+        return accountRepository.findByEmailAndPassword(email, password);
     }
 
 }

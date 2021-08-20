@@ -2,6 +2,7 @@ package com.douzone.mehago.controller;
 
 import javax.crypto.spec.SecretKeySpec;
 
+import com.douzone.mehago.security.Auth;
 import com.douzone.mehago.service.AccountService;
 import com.douzone.mehago.vo.Account;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +24,13 @@ import lombok.RequiredArgsConstructor;
 public class AccountController {
     
     private final AccountService accountService;
+
+    @Auth
+    @GetMapping("/test")
+    @ResponseBody
+    public String test(){
+        return "eunji hi";
+    }
 
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@RequestBody Account account) {
