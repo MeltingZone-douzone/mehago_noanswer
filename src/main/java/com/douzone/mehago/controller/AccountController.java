@@ -58,18 +58,16 @@ public class AccountController {
         
         return ResponseEntity.ok().build();
     }
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account){  
         Account result =  null; 
-        System.out.println(account.toString());
-        String data="test";
-        try{
-            result = accountService.login(account);   
-        }catch(Exception e){
-            return ResponseEntity.ok().build();
-                }            
-        return ResponseEntity.ok().body("test");
+        // System.out.println(account.toString());
+        // String data="test";
+   
+            result = accountService.getAccount(account);   
+         
+  
+           return ResponseEntity.ok().body(result);         
     }
 }
 

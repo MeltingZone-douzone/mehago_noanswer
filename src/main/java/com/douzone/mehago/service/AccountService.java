@@ -35,8 +35,8 @@ public class AccountService {
     public void signUp(Account account) {
         accountRepository.signUp(account);
     }
-    
-    public Account login(Account account){
-        return accountRepository.login(account);
+
+    public Account getAccount(Account account){
+        return accountRepository.getAccount(account);
     }  
 }

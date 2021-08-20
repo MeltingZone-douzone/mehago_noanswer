@@ -46,4 +46,13 @@
 		]]>
 	</update>
 
+	<select id="findByEmailAndPassword" parameterType="account"
+		resultType="account">
+		<![CDATA[
+		select no
+		  from account 
+		 where email = #{email } 
+		   and password = #{password } 
+		   ]]>
+	</select>
 </mapper>

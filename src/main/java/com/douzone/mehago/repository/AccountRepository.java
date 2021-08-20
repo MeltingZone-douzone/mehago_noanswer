@@ -30,7 +30,7 @@ public class AccountRepository {
         sqlSession.insert("account.insert", account);
 
     }
-    public Account login(Account account) {
+    public Account getAccount(Account account) {
         return sqlSession.selectOne("account.findByEmailAndPassword",account);
     }
 
