@@ -2,44 +2,37 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import styles from "../assets/sass/account/LoginForm.scss";
-import axios from "axios";
 
 export default function LoginForm() {
-  const [memberVo, setMemberVo] = useState({ email: "", password: "" });
+
+  const [memberVo, setMemberVo] = useState({ id: "", password: "" });
   const [loginFail, setLoginFail] = useState(false);
 
   const login = (e) => {
     e.preventDefault();
     try {
       axios
-        .post("/api/account/login", memberVo, {
-          headers: {
-            ContentType: "application/json",
-            Accept: "application/json",
-          },
-        })
+        .post("/spring/account/api/login", memberVo, { headers: {} })
         .then((res) => {
-          console.log(res.statusText === "OK");
-          console.log(res.data);
-          console.log(res.data === "cant find Account");
-          if (res.statusText === "OK") {
-            if (res.data === "cant find Account") {
-              // 틀렸을 경우에
-              setLoginFail(true);
-              setMemberVo({ ...memberVo, password: "" });
-            } // 성공하면 메인화면 가기
+          if (res.data.result == "success") {
+            console.log("와!");
           }
         });
+      // 성공하면 옆으로...
+
+      // 틀렸을 경우에
+      setLoginFail(true);
+      setMemberVo(...memberVo,{password:""});
+
     } catch (err) {
-      console.error(err);
+      next(err);
     }
   };
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    console.log(name, value);
-    setMemberVo({ ...memberVo, [name]: value });
+      const { name, value } = e.target;
+      setMemberVo(...memberVo,{[name] : value});
   };
-
+  
   return (
     <div className={styles.LoginForm}>
       <div className={styles.Message}>
@@ -58,7 +51,7 @@ export default function LoginForm() {
             variant="outlined"
             size="medium"
             autoComplete="off"
-            name="email"
+            name="id"
             value={memberVo.id}
             onChange={(e) => handleChange(e)}
           />
