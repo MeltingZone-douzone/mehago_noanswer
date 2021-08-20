@@ -60,14 +60,16 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public JsonResult login(@RequestBody Account account){  
+    public ResponseEntity<?> login(@RequestBody Account account){  
         Account result =  null; 
+        System.out.println(account.toString());
+        String data="test";
         try{
             result = accountService.login(account);   
         }catch(Exception e){
-            return JsonResult.fail(e.toString());
-        }        
-        return JsonResult.success(result==null? "cant find account": result );
+            return ResponseEntity.ok().build();
+                }            
+        return ResponseEntity.ok().body("test");
     }
 }
 

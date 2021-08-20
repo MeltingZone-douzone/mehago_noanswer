@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import styles from "../assets/sass/account/LoginForm.scss";
+import axios from "axios";
 
 export default function LoginForm() {
   const [memberVo, setMemberVo] = useState({ email: "", password: "" });
@@ -18,6 +19,7 @@ export default function LoginForm() {
           },
         })
         .then((res) => {
+          console.log(res);
           if (res.data.result == "success") {
             console.log(res.data);
             if (res.data.data === "cant find account") {
