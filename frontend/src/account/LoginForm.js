@@ -2,37 +2,45 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import styles from "../assets/sass/account/LoginForm.scss";
+import axios from "axios";
+import localStorage from "local-storage";
+
+import NonMembers from "../components/NonMember";
 
 export default function LoginForm() {
-
-  const [memberVo, setMemberVo] = useState({ id: "", password: "" });
+  const [memberVo, setMemberVo] = useState({ email: "", password: "" });
   const [loginFail, setLoginFail] = useState(false);
 
   const login = (e) => {
     e.preventDefault();
     try {
       axios
-        .post("/spring/account/api/login", memberVo, { headers: {} })
+        .post("/api/account/login", memberVo, {
+          headers: {
+            ContentType: "application/json",
+            Accept: "application/json",
+          },
+        })
         .then((res) => {
-          if (res.data.result == "success") {
-            console.log("와!");
+          if (res.statusText === "OK") {
+            if (res.data === "cant find Account") {
+              // 틀렸을 경우에
+              setLoginFail(true);
+              setMemberVo({ ...memberVo, password: "" });
+            } // 성공하면 메인화면 가기
+            localStorage.set("token", res.data);
           }
         });
-      // 성공하면 옆으로...
-
-      // 틀렸을 경우에
-      setLoginFail(true);
-      setMemberVo(...memberVo,{password:""});
-
     } catch (err) {
-      next(err);
+      console.error(err);
     }
   };
   const handleChange = (e) => {
-      const { name, value } = e.target;
-      setMemberVo(...memberVo,{[name] : value});
+    const { name, value } = e.target;
+    console.log(name, value);
+    setMemberVo({ ...memberVo, [name]: value });
   };
-  
+
   return (
     <div className={styles.LoginForm}>
       <div className={styles.Message}>
@@ -51,8 +59,8 @@ export default function LoginForm() {
             variant="outlined"
             size="medium"
             autoComplete="off"
-            name="id"
-            value={memberVo.id}
+            name="email"
+            value={memberVo.email}
             onChange={(e) => handleChange(e)}
           />
         </div>
@@ -88,6 +96,7 @@ export default function LoginForm() {
           </Button>
         </div>
       </form>
+      <NonMembers />
     </div>
   );
 }

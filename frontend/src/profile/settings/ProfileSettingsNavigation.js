@@ -2,21 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { colors } from '../../assets/styles/Colors';
-export default function UserSettingsNavigation() {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+
+
+export default function UserSettingsNavigation({match}) {
 
     const activeStyle = {
-        color: '#ffca08',
-        borderColor: '#ffca08',
-        borderBottom: '5px solid #ffca08',
-        boxShadow: '0px 4px 10px rgba(0,0,0,.2)'
+        color: colors.mainThemeColor,
+        borderColor: colors.mainThemeColor,
     };
 
     return(
         <SettingsNavContainer>
-            {/* <NavItemGroup to={"/"} activeStyle={activeStyle}><Icon icon={faUser}/><p>Profile</p></NavItemGroup>
-            <NavItemGroup to={"/"} activeStyle={activeStyle}><Icon icon={faBell}/><p>Alarm</p></NavItemGroup> */}
-            <NavItemGroup ><p>Profile</p></NavItemGroup>
-            <NavItemGroup ><p>Alarm</p></NavItemGroup>
+            <NavItemGroup to={`${match.path}/info`} activeStyle={activeStyle}><FontAwesomeIcon icon={faUser}/><p>Profile</p></NavItemGroup>
+            <NavItemGroup to={`${match.path}/alram`} activeStyle={activeStyle}><FontAwesomeIcon icon={faBell}/><p>Alarm</p></NavItemGroup>
         </SettingsNavContainer>
     );
 }
@@ -28,19 +28,23 @@ const SettingsNavContainer = styled.div`
     place-content:center;
 `
 
-const NavItemGroup = styled.div`
+const NavItemGroup = styled(NavLink)`
     width:4em;
     height:95%;
     padding:0 .5em;
     display:flex;
     justify-content:center;
     align-items:center;
+    text-decoration: none;
+    border-bottom: 2px solid #ccc;
     
-    border-bottom: 2px solid ${colors.mainThemeColor};
-    
-    color: ${colors.mainThemeColor};
+    color: #ccc;
 
     & + &{
         margin-left: 20px;
+    }
+
+    p {
+        margin-left:5px;
     }
 `

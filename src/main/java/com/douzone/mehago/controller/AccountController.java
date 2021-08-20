@@ -30,6 +30,17 @@ public class AccountController {
     private final JwtTokenUtil jwtTokenUtil;
     private final JwtDecoder jwtDecoder;
     private final AccountService accountService;
+    
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Account account){  
+        Account result = accountService.getAccount(account);  
+        if(result == null){
+            return ResponseEntity.ok().body("cant find Account");         
+        }
+        String token = jwtTokenUtil.generateAccessToken(result);
+        return ResponseEntity.ok().body(token);
+            
+    }
 
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@RequestBody Account account) {
@@ -92,5 +103,6 @@ public class AccountController {
         
         return ResponseEntity.ok().build();
     }
+
 }
 

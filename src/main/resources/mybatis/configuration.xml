@@ -4,7 +4,7 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.douzone.mehago.vo.Account" alias="accountvo"/>
+		<typeAlias type="com.douzone.mehago.vo.Account" alias="account"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/account.xml" />

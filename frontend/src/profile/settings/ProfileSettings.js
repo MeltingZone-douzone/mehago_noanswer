@@ -1,15 +1,18 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
+import AlramSettingsTemplate from './AlramSettingsTemplate';
 import UserSettingsNavigation from './ProfileSettingsNavigation';
 import UserSettingsTemplate from './ProfileSettingsTemplate';
 
 
-export default function UserSettingsContainer({user}) {
+export default function UserSettingsContainer({user, match}) {
 
     return(
         <SettingsContainer>
-            <UserSettingsNavigation />
-            <UserSettingsTemplate user = {user}/>
+            <UserSettingsNavigation match={match} />
+            <Route path={"/profile/info"} render={props => <UserSettingsTemplate {...props}/>} />
+            <Route path={"/profile/alram"} component={AlramSettingsTemplate(user)} />
         </SettingsContainer>
     );
 }

@@ -36,4 +36,7 @@ public class AccountService {
         accountRepository.signUp(account);
     }
 
+    public Account getAccount(Account account){
+        return accountRepository.getAccount(account);
+    }  
 }
