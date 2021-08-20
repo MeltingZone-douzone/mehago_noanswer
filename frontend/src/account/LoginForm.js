@@ -3,6 +3,9 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import styles from "../assets/sass/account/LoginForm.scss";
 import axios from "axios";
+import localStorage from "local-storage";
+
+import NonMembers from "../components/NonMember";
 
 export default function LoginForm() {
   const [memberVo, setMemberVo] = useState({ email: "", password: "" });
@@ -19,15 +22,13 @@ export default function LoginForm() {
           },
         })
         .then((res) => {
-          console.log(res.statusText === "OK");
-          console.log(res.data);
-          console.log(res.data === "cant find Account");
           if (res.statusText === "OK") {
             if (res.data === "cant find Account") {
               // 틀렸을 경우에
               setLoginFail(true);
               setMemberVo({ ...memberVo, password: "" });
             } // 성공하면 메인화면 가기
+            localStorage.set("token", res.data);
           }
         });
     } catch (err) {
@@ -59,7 +60,7 @@ export default function LoginForm() {
             size="medium"
             autoComplete="off"
             name="email"
-            value={memberVo.id}
+            value={memberVo.email}
             onChange={(e) => handleChange(e)}
           />
         </div>
@@ -95,6 +96,7 @@ export default function LoginForm() {
           </Button>
         </div>
       </form>
+      <NonMembers />
     </div>
   );
 }

@@ -49,7 +49,7 @@
 	<select id="findByEmailAndPassword" parameterType="account"
 		resultType="account">
 		<![CDATA[
-		select no
+		select no, email, nickname
 		  from account 
 		 where email = #{email } 
 		   and password = #{password } 

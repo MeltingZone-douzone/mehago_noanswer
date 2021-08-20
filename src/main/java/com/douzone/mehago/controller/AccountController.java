@@ -1,8 +1,14 @@
 package com.douzone.mehago.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import java.util.Enumeration;
+
 import javax.crypto.spec.SecretKeySpec;
 
 import com.douzone.mehago.service.AccountService;
+import com.douzone.mehago.utils.JwtDecoder;
+import com.douzone.mehago.utils.JwtTokenUtil;
 import com.douzone.mehago.vo.Account;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Encryption;
@@ -22,6 +28,19 @@ import lombok.RequiredArgsConstructor;
 public class AccountController {
     
     private final AccountService accountService;
+    private final JwtDecoder jwtDecoder;
+    private final JwtTokenUtil jwtTokenUtil;
+    
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Account account){  
+        Account result = accountService.getAccount(account);  
+        if(result == null){
+            return ResponseEntity.ok().body("cant find Account");         
+        }
+        String token = jwtTokenUtil.generateToken(result);
+        return ResponseEntity.ok().body(token);
+            
+    }
 
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@RequestBody Account account) {
@@ -58,11 +77,6 @@ public class AccountController {
         
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Account account){  
-        Account result = accountService.getAccount(account);  
-       
-        return ResponseEntity.ok().body(result == null ? "cant find Account" : result);         
-    }
+
 }
 
