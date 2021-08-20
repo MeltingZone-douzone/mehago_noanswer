@@ -1,7 +1,10 @@
 package com.douzone.mehago.controller;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.crypto.spec.SecretKeySpec;
 
+import com.douzone.mehago.dto.CommonResponse;
 import com.douzone.mehago.service.AccountService;
 import com.douzone.mehago.utils.AES;
 import com.douzone.mehago.utils.JwtDecoder;
@@ -34,9 +37,9 @@ public class AccountController {
         return ResponseEntity.ok().build();
     }
 
-    // 암호화 테스트용.. localhost:9999/profile하면 볼 수 있음.
+    // ?��?��?�� ?��?��?��?��.. localhost:9999/profile?���? �? ?�� ?��?��.
     @GetMapping("/get-user")
-    public void getUser() {
+    public ResponseEntity<?> getUser() {
         // String secretKey = "Peach";
         // String originalString = "asd003786!";
 
@@ -46,17 +49,26 @@ public class AccountController {
         // System.out.println(encryptedString);
         // System.out.println(decryptedString);
 
+        System.out.println("안녕");
+
         Account account =  new Account();
         account.setNo(2L);
         account.setNickname("nickname");
 
 
-        String token = jwtTokenUtil.generateToken(account);
+        String token = jwtTokenUtil.generateAccessToken(account);
         System.out.println(token);
 
+        try{
+            TimeUnit.SECONDS.sleep(2);
+        }catch(Exception e){
+            e.getStackTrace();
+        }
         Account validAccount = jwtDecoder.decodeJwt(token);
 
         System.out.println(validAccount.toString());
+
+        return ResponseEntity.ok().body(CommonResponse.success(token));
     }
     
 

@@ -7,7 +7,8 @@ export function signUpApi(user) {
 }
 
 export function getUserInfo() {
-    return axios.get("/api/account/get-user", {headers:{"Context-Type" : "application/json"}});
+    return axios.get("/api/account/get-user", {headers:{"Context-Type" : "application/json"}})
+                .then(res => console.log(res));
 }
 
 // 닉네임 존재여부
