@@ -17,23 +17,22 @@ export default function SignUpForm() {
     axios.post('/api/account/sign-up/valid-' + name,
               value,
               { headers: {"Content-Type": "text/plain"} }
-    )
+      )
       .then(response => {
         console.log(response.data); // null 이면 사용가능한 이메일
         // if(response.data !== 'null') {
         if(response.data !== null) {  // 이미 있을 경우
           // console.log("이미 있는 ",name," 입니다"); // TODO 
           console.log(`이미 있는 ${name} : ${response.data}`);
+          return false;
         }
+
       })
   }
 
 
   const validation = {
     checkEmail: function(e) {
-        if((e.target.value) === '') {
-          return false;
-        }
         const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
         const data = regExp.test(e.target.value);
         console.log(data? "유효성ok" : "유효성ㄴㄴ");
@@ -42,9 +41,6 @@ export default function SignUpForm() {
         }
     },
     checkPassword: function(e)  {
-        if((e.target.value) === '') {
-          return false;
-        }
         //  8 ~ 10자 영문, 숫자 조합
         const regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/
         console.log(e.target.value);
@@ -55,16 +51,10 @@ export default function SignUpForm() {
         }
     },
     checkNickName: function(e) {
-        if((e.target.value) === '') {
-          return false;
-        }
         isExist(e.target.name, e.target.value)
         // DB 중복체크
     },
     checkPhoneNumber: function(e)  {
-        if((e.target.value) === '') {
-          return false;
-        }
         const regExp = /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/ // (-) 없는 정규식 
         console.log(e.target.value);
         const data = regExp.test(e.target.value);
@@ -139,7 +129,7 @@ export default function SignUpForm() {
             autoComplete="off"
             name="email"
             onChange={handleChange}
-            onBlur={validation.checkEmail}
+            onBlur={(e) => e.target.value !== '' && validation.checkEmail(e)}
           />
         </div>
         <div className={styles.Password}>
@@ -152,7 +142,7 @@ export default function SignUpForm() {
             size="medium"
             name="password"
             onChange={handleChange}
-            onBlur={validation.checkPassword}
+            onBlur={(e) => e.target.value !== '' && validation.checkPassword(e)}
           />
         </div>
         <div className={styles.NickName}>
@@ -166,7 +156,7 @@ export default function SignUpForm() {
             autoComplete="off"
             name="nickName"
             onChange={handleChange}
-            onBlur={validation.checkNickName}
+            onBlur={(e) => e.target.value !== '' && validation.checkNickName(e)}
           />
         </div>
         <div className={styles.PhoneNumber}>
@@ -180,7 +170,7 @@ export default function SignUpForm() {
             autoComplete="off"
             name="phoneNumber"
             onChange={handleChange}
-            onBlur={validation.checkPhoneNumber}
+            onBlur={(e) => e.target.value !== '' && validation.checkPhoneNumber(e)}
           />
         </div>
         <div className={styles.LoginButton}>

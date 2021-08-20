@@ -1,4 +1,4 @@
-package com.example.serverconstruction.responses;
+package com.douzone.mehago.responses;
 
 import java.util.List;
 
@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter @Getter @NoArgsConstructor @AllArgsConstructor
-public class DataAndListResponse<T> extends BasicResponse{
+public class CommonResponseList<T> extends BasicResponse{
     
-    private T data;
     private List<T> dataList;
 
 }

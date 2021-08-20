@@ -1,4 +1,4 @@
-package com.example.serverconstruction.responses;
+package com.douzone.mehago.responses;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

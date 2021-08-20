@@ -1,13 +1,13 @@
-package com.example.serverconstruction;
+package com.douzone.mehago;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ServerconstructionApplication {
+public class mehagoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServerconstructionApplication.class, args);
+		SpringApplication.run(mehagoApplication.class, args);
 	}
 
 }

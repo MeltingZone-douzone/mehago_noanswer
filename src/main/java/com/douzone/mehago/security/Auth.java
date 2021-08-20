@@ -1,4 +1,4 @@
-package com.example.serverconstruction.security;
+package com.douzone.mehago.security;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,6 +11,8 @@ import java.lang.annotation.Target;
 // RetentionPolicy는 RetentionPolicy의 값을 넘겨주는 것으로 어노테이션의 메모리 보유 범위가 결정됨
 public @interface Auth {
 //	public String value() default "USER";	// requestParam 의 기본값은 value로 되어있음 value=""
-	public enum Role { ADMIN, USER }
-	public Role role() default Role.USER;
+	// public enum Role { ADMIN, USER }
+	// public Role role() default Role.USER;
+
+	public String user() default "USER";
 }

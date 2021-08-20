@@ -1,4 +1,4 @@
-package com.example.serverconstruction.dto;
+package com.douzone.mehago.dto;
 
 public class JsonResult {
 

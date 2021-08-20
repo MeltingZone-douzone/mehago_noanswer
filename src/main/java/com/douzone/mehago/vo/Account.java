@@ -1,4 +1,4 @@
-package com.example.serverconstruction.vo;
+package com.douzone.mehago.vo;
 
 import lombok.Data;
 

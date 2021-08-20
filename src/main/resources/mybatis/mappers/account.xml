@@ -5,7 +5,17 @@
 
 <mapper namespace="account">
 
-	<insert id="insert" parameterType="accountvo">
+	<select id="findByEmailAndPassword" parameterType="map" resultType="account">
+		<![CDATA[
+			SELECT 
+				no, name
+			FROM 
+				user 
+			WHERE email = #{email} AND password = #{password}
+		]]>
+	</select>
+
+	<insert id="insert" parameterType="account">
 		<![CDATA[
 			insert 
 				into account 
@@ -48,7 +58,7 @@
 
 
 
-	<update id="update" parameterType="accountvo">
+	<update id="update" parameterType="account">
 		<choose>
 			<when test='password == ""'>
 				<![CDATA[

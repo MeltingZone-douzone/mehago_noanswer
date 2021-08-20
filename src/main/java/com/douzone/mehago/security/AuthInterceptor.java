@@ -1,10 +1,10 @@
-package com.example.serverconstruction.security;
+package com.douzone.mehago.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.example.serverconstruction.vo.Account;
+import com.douzone.mehago.vo.Account;
 
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -47,7 +47,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			HttpSession session = request.getSession();
 			if(session == null ) {
 				System.out.println("session == null in AuthInterceptor");
-				response.sendRedirect(request.getContextPath()+"/user/login");
+				response.sendRedirect(request.getContextPath()+"/api/account/login");
 //				request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
 				return false;
 			}
@@ -59,18 +59,24 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			if(authUser == null) {
 				System.out.println("authUser == null in AuthInterceptor");
 //				request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
-				response.sendRedirect(request.getContextPath()+"/user/login");
+				response.sendRedirect(request.getContextPath() + "/api/account/login");
 				return false;
 			}
+
+
+			
+			///////////////////////////////////////////////////////////////////
 			
 //			7. 권한(Authorization) 체크를 위해서 @Auth의 role 가져오기 ("ADMIN", "USER")
 			
-			String role = auth.role().toString();
+			String role = auth.user().toString();
 
 			// TODO role 대신 회원/비회원 구분할 거 찾기
 			// String authRole = authUser.getRole();
 			// System.out.println(role + " " + authRole);
 			
+/*
+
 			if("ADMIN".equals(role)) {
 //				if(!"ADMIN".equals(authRole)) {
 				if("USER".equals(authRole)) {
@@ -80,9 +86,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 				}
 			}
 					
-			 
+			 */
 			
 			// 8. 인터셉터 통과 후 메서드 실행
+		// 옳은 관리자 권한
+		// @Auth의 role: "ADMIN"
+		// authUser의 role: "ADMIN"
 			return true;
 		}
 }

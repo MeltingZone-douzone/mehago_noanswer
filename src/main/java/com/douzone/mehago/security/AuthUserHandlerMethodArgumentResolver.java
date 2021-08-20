@@ -1,7 +1,9 @@
-package com.example.serverconstruction.security;
+package com.douzone.mehago.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import com.douzone.mehago.vo.Account;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebArgumentResolver;
@@ -9,8 +11,6 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-
-import com.example.serverconstruction.vo.Account;
 
 public class AuthUserHandlerMethodArgumentResolver  implements HandlerMethodArgumentResolver{
 
@@ -42,7 +42,7 @@ public class AuthUserHandlerMethodArgumentResolver  implements HandlerMethodArgu
 		}
 		
 		// @authUser가 선언되어있는데 타입이 UserVO가 아니면 
-		if(parameter.getParameterType().equals(UserVO.class) == false) { 
+		if(parameter.getParameterType().equals(Account.class) == false) { 
 			return false;
 		}
 		
