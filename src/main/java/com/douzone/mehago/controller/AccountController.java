@@ -60,14 +60,9 @@ public class AccountController {
     }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account){  
-        Account result =  null; 
-        // System.out.println(account.toString());
-        // String data="test";
-   
-            result = accountService.getAccount(account);   
-         
-  
-           return ResponseEntity.ok().body(result);         
+        Account result = accountService.getAccount(account);  
+       
+        return ResponseEntity.ok().body(result == null ? "cant find Account" : result);         
     }
 }
 

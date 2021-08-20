@@ -19,10 +19,11 @@ export default function LoginForm() {
           },
         })
         .then((res) => {
-          console.log(res);
-          if (res.data.result == "success") {
-            console.log(res.data);
-            if (res.data.data === "cant find account") {
+          console.log(res.statusText === "OK");
+          console.log(res.data);
+          console.log(res.data === "cant find Account");
+          if (res.statusText === "OK") {
+            if (res.data === "cant find Account") {
               // 틀렸을 경우에
               setLoginFail(true);
               setMemberVo({ ...memberVo, password: "" });
