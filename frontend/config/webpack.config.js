@@ -15,12 +15,12 @@ module.exports = (env) => ({
         }, {
             test: /\.(sa|sc|c)ss$/i,
             use: [
-                'style-loader',
-                { loader: 'css-loader', options: { modules: true } },
-                'sass-loader'
-            ]
+              "style-loader",
+              { loader: "css-loader", options: { modules: true } },
+              "sass-loader",
+            ],
         }, {
-            test: /\.js$/,
+            test: /\.js|jsx$/,
             exclude: /node_modules/,
             loader: 'babel-loader',
             options: {
@@ -36,6 +36,7 @@ module.exports = (env) => ({
         port: 9999,
         proxy:{
             '/api': 'http://localhost:8080',
+            '/chat': 'http://localhost:8888'
         },
         inline: true,
         liveReload: true,

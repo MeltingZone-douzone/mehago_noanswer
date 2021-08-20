@@ -40,4 +40,24 @@ public class AccountService {
         }
         return result;
     }
+    public void updateNickname(Account account) {
+
+        
+    }
+
+    
+    public void updatePassword(Account account) {
+        
+        
+        
+    }
+
+    public void updateUserInfo(Account account) {
+        
+        
+    }
+
+    public Account getAccount(Account account){
+        return accountRepository.getAccount(account);
+    }  
 }

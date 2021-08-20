@@ -38,6 +38,7 @@ const application = express()
                             .use("/api", GuestbookRouter)
                             .use(errorRouter.error404)
                             .use(errorRouter.error500);
+                            });
 
 // Server Setup
 http.createServer(application)

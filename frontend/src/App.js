@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import SignUpPage from './SignUpPage';
+import React from 'react';
+import styled from 'styled-components';
+import MainRouter from './routes/MainRouter';
 
-export default class App extends Component {
-  render() {
-    return (
-      <div id="App">
-        <SignUpPage />
-      </div>
-    );
-  }
+
+export default function App() {
+
+    return(
+        <MainRouter />
+    )
 }

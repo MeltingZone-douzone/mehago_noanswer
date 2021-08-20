@@ -9,7 +9,9 @@ public class Account {
 
     private String email;
     private String password;
-    private String nickName;
-    private int phoneNumber;
+    private String nickname;
+    private String name;
+    private String phoneNumber;
+    private String thumbnailUrl;
     // created_at
 }

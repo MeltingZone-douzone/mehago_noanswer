@@ -41,5 +41,23 @@ public class AccountRepository {
         return sqlSession.selectOne("account.isExistPhoneNumber",phoneNumber);
     }
 
+    public boolean updateNickname(Account account) {
+        return sqlSession.update("account.updateNickname", account.getNickname()) == 1 ? true : false;
+    }
 
+    public boolean updatePassword(Account account) {
+        return sqlSession.update("account.updatePassword", account.getNickname()) == 1 ? true : false;
+    }
+
+    public boolean updateUserInfo(Account account) {
+        return sqlSession.update("account.updateUserInfo", account.getNickname()) == 1 ? true : false;
+    }
+
+    public void signUp(Account account) {
+        sqlSession.insert("account.insert", account);
+
+    }
+    public Account getAccount(Account account) {
+        return sqlSession.selectOne("account.findByEmailAndPassword",account);
+    }
 }

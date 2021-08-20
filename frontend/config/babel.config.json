@@ -1,5 +1,5 @@
 {
-    "presets": [["@babel/env",{
+    "presets": [["@babel/preset-env",{
       "targets": {
         "ie": "11",
         "edge": "80",
@@ -8,6 +8,5 @@
         "opera": "69",
         "safari": "13"
       }
-    }], "@babel/preset-react"],
-    "plugins": ["@babel/plugin-transform-runtime"]
+    }], "@babel/preset-react"]
   }

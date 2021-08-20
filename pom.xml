@@ -8,15 +8,16 @@
 		<version>2.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>serverconstruction</artifactId>
+	<groupId>com.douzone</groupId>
+	<artifactId>mehago</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>serverconstruction</name>
+	<name>mehago</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-  		<maven.compiler.source>1.8</maven.compiler.source>
-  		<maven.compiler.target>1.8</maven.compiler.target>
+		<java.version>11</java.version>
 	</properties>
+
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -35,7 +36,7 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
+
 		<!-- maria db -->
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
