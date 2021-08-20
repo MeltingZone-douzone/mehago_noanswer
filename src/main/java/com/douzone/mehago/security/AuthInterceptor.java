@@ -47,7 +47,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			HttpSession session = request.getSession();
 			if(session == null ) {
 				System.out.println("session == null in AuthInterceptor");
-				response.sendRedirect(request.getContextPath() + "/api/account/login");
+				response.sendRedirect(request.getContextPath()+"/api/account/login");
 //				request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
 				return false;
 			}

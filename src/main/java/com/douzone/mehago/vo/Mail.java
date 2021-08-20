@@ -1,4 +1,4 @@
-package com.douzone.mehago.dto;
+package com.douzone.mehago.vo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class MailDto {
+public class Mail {
     private String address;
     private String title;
     private String message;

@@ -6,11 +6,12 @@ import lombok.Data;
 public class Account {
 
     private Long no;
+
     private String email;
     private String password;
     private String nickname;
     private String name;
     private String phoneNumber;
     private String thumbnailUrl;
-
+    // created_at
 }

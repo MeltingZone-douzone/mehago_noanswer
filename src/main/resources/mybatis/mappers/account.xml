@@ -5,7 +5,17 @@
 
 <mapper namespace="account">
 
-	<insert id="insert" parameterType="accountvo">
+	<select id="findByEmailAndPassword" parameterType="map" resultType="account">
+		<![CDATA[
+			SELECT 
+				no, name
+			FROM 
+				user 
+			WHERE email = #{email} AND password = #{password}
+		]]>
+	</select>
+
+	<insert id="insert" parameterType="account">
 		<![CDATA[
 			insert 
 				into account 
@@ -13,15 +23,64 @@
 		]]>
 	</insert>
 
-	<select id="findById" parameterType="Long" resultType="accountvo">
+	<select id="isExistEmail" parameterType="string" resultType="String">
 		<![CDATA[
-			select id, email, name, gender
-				from account
-				where id = #{id}
+			select 
+				email
+			from 
+				account
+			where 
+				email = #{email}
 		]]>
 	</select>
 
-	<update id="updateNickname" parameterType="accountvo">
+	<select id="isExistNickName" parameterType="string" resultType="String">
+		<![CDATA[
+			select 
+				nickName
+			from 
+				account
+			where 
+				nickName = #{nickName}
+		]]>
+	</select>
+
+	<select id="isExistPhoneNumber" parameterType="string" resultType="String">
+		<![CDATA[
+			select 
+				phone_number
+			from 
+				account
+			where 
+				phone_number = #{phone_number}
+		]]>
+	</select>
+
+
+
+	<update id="update" parameterType="account">
+		<choose>
+			<when test='password == ""'>
+				<![CDATA[
+				update account
+			       set name=#{name },
+			           gender=#{gender }
+			     where id=${id }
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				update account
+				   set name=#{name },
+				       password=#{password }, 
+				       gender=#{gender }
+				 where id=${id }	
+				]]>
+			</otherwise>
+		</choose>
+	</update>
+
+	<update id="updateNickname" parameterType="account">
 		<![CDATA[
 		    update account
 		    set nickname=#{nickname }
@@ -29,7 +88,7 @@
 		]]>
 	</update>
 
-    <update id="updatePassword" parameterType="accountvo">
+    <update id="updatePassword" parameterType="account">
 		<![CDATA[
 		    update account
 		    set password=#{password}
@@ -37,7 +96,7 @@
 		]]>
 	</update>
 
-    <update id="updateUserInfo" parameterType="accountvo">
+    <update id="updateUserInfo" parameterType="account">
 		<![CDATA[
 		    update account
 		    set name=#{name },
@@ -47,7 +106,7 @@
 	</update>
 
 	<select id="searchAccount" parameterType="map"
-		resultType="accountvo">
+		resultType="account">
 		<![CDATA[
 			select email, password
 				from account 
@@ -57,7 +116,7 @@
 	</select>
 
 	<select id="searchEmail" parameterType="map"
-		resultType="accountvo">
+		resultType="account">
 		<![CDATA[
 			select email
 				from account 

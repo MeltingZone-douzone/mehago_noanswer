@@ -1,6 +1,5 @@
 package com.douzone.mehago.repository;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +14,13 @@ public class AccountRepository {
     
     @Autowired
     private SqlSession sqlSession;
+    
+    public Account findByEmailAndPassword(String email, String password) {
+        Map<String, Object> map = new HashMap();
+		map.put("email", email);
+		map.put("password", password);
+		return sqlSession.selectOne("account.findByEmailAndPassword", map);
+    }
 
     public Boolean insert(Account vo) {
 		int result = sqlSession.insert("account.insert", vo);
@@ -28,8 +34,22 @@ public class AccountRepository {
 
     public void signUp(Account account) {
       sqlSession.insert("account.insert", account);
-
     }
+
+    public String isExistEmail(String email) {
+        return sqlSession.selectOne("account.isExistEmail",email);
+    }
+
+
+    public String isExistNickName(String nickName) {
+        return sqlSession.selectOne("account.isExistNickName", nickName);
+    }
+
+
+    public String isExistPhoneNumber(String phoneNumber) {
+        return sqlSession.selectOne("account.isExistPhoneNumber",phoneNumber);
+    }
+
     public Account getAccount(Account account) {
       return sqlSession.selectOne("account.findByEmailAndPassword",account);
     }
@@ -53,13 +73,6 @@ public class AccountRepository {
 		  map.put("randomPassword", randomPassword);
 		  map.put("email", email);
       sqlSession.update("account.updateRendomPassword", map);
-    }
-
-    public Account findByEmailAndPassword(String email, String password) {
-        Map<String, String> map = new HashMap<>();
-		map.put("e", email);
-		map.put("p", password);
-        return sqlSession.selectOne("account.findByEmailAndPassword", map);
     }
 
 }

@@ -4,9 +4,13 @@ const http = require('http');
 const path = require('path');
 const dotenv = require("dotenv");
 const argv = require('minimist')(process.argv.slice(2));
+const socketio = require('socket.io')
 
 // Environment Variables(환경 변수)
 dotenv.config({ path: path.join(__dirname, 'app.config.env') });
+
+const GuestbookRouter = require('./routes/guestbook');
+const errorRouter = require('./routes/error');
 
 //Logging
 const logger = require("./logging");
@@ -25,14 +29,16 @@ const application = express()
                             .use(express.json())
                             .use(express.static(path.join(__dirname, process.env.STATIC_RESOURCES_DIRECTORY)))
                             .set("views",path.join(__dirname,"views"))
+                            .set("view engine", "ejs")
                             .all("*", function(req, res, next) {
                                 res.locals.req = req;
                                 res.locals.resp = res;
                                 next();
+                            })
+                            .use("/api", GuestbookRouter)
+                            .use(errorRouter.error404)
+                            .use(errorRouter.error500);
                             });
-                            // // .use("/api");
-                            // // .use(errorRouter.error404)
-                            // // .use(errorRouter.error500);
 
 // Server Setup
 http.createServer(application)

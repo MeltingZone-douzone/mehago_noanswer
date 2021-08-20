@@ -1,7 +1,7 @@
 package com.douzone.mehago.service;
 
 
-import com.douzone.mehago.dto.MailDto;
+import com.douzone.mehago.vo.Mail;
 import com.douzone.mehago.util.MailHandler;
 
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,7 +15,7 @@ public class MailService {
     private JavaMailSender mailSender;
     // private static final String FROM_ADDRESS = "mehagoChat@gmail.com";
 
-    public void mailSend(MailDto mailDto) {
+    public void mailSend(Mail mailDto) {
         try {
             MailHandler mailHandler = new MailHandler(mailSender);
             // 받는 사람

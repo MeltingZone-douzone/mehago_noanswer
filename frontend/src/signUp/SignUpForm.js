@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import styles from "../assets/sass/account/SignUpForm.scss";
-import { signUpApi } from "../../api/AccountApi";
+import styles from "../assets/scss/signUp/SignUpForm.scss";
 import axios from "axios";
 
 export default function SignUpForm() {
@@ -15,12 +14,12 @@ export default function SignUpForm() {
 // dfdf@dfdf.com
   const isExist = (name, value) => {
     // console.log(name, " : ", value);
-    axios.post('/api/account/signup/valid-' + name,
+    axios.post('/api/account/sign-up/valid-' + name,
               value,
               { headers: {"Content-Type": "text/plain"} }
       )
       .then(response => {
-        console.log(response.data, ' 사용가능함'); // null 이면 사용가능한 이메일
+        console.log(response.data); // null 이면 사용가능한 이메일
         // if(response.data !== 'null') {
         if(response.data !== null) {  // 이미 있을 경우
           // console.log("이미 있는 ",name," 입니다"); // TODO 
@@ -94,17 +93,18 @@ export default function SignUpForm() {
   const apiFunction = {
     emailCheck: function() {
     },
-    SignUp: function(user) {
+    SignUp: async function(user) {
         console.log(user);
-        const response = fetch('/api/account/signup', {
+        const response = await fetch('/api/account/sign-up', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(user)
         });
         if(!response.ok){
+          console.log('호이');
             // throw new Error(`${response.status} ${response.statusText}`)
         }
-        const json  = response.json();
+        const json  = await response.json();
         if(json.result !== 'success') {
             throw new Error(`${json.result} ${json.message}`)
         }

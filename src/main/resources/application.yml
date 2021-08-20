@@ -9,7 +9,17 @@ spring:
       view:
          prefix: /WEB-INF/views/
          suffix: .jsp
+
+   http:
+      encoding:
+         charset: UTF-8
+         enabled: true
+         forced: true
+         forced-request: true
+         forced-response: true
+
    messages:
+      always-messages-format: true
       basename: messages/messages_ko
       encoding: UTF-8
    servlet:
@@ -23,9 +33,7 @@ spring:
 ---
 # dev profile - spring boot configuration 
 spring:
-   config:
-      activate:
-         on-profile: dev
+   profiles: dev
    devtools:
       livereload:
          enabled: true
@@ -34,12 +42,12 @@ spring:
       url: jdbc:mysql://127.0.0.1:3306/chat?characterEncoding=utf8
       username: bookmall_local
       password: bookmall_local
+      initialSize: 10
+      maxActive: 100
 ---
 # production profile - spring boot configuration
 spring:
-   config:
-      activate:
-         on-profile: production
+   profiles: production
    datasource:
       driver-class-name: org.mariadb.jdbc.Driver
       url: jdbc:mysql://127.0.0.1:3306/chat?characterEncoding=utf8&allowPublicKeyRetrieval=true
@@ -50,16 +58,13 @@ spring:
 server:
    port: 8080
    servlet:
-      encoding:
-         charset: UTF-8
-         enabled: true
 
 ---
 #mybatis
 mybatis:
    config-location: classpath:mybatis/configuration.xml
 
-#---
+---
 #logging
 # logging:
 #   config: classpath:logback.xml

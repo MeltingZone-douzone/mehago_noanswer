@@ -1,3 +1,5 @@
+.mvn/
+.vscode/
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -36,4 +38,3 @@ build/
 node_modules/
 backend/logs/
 
-dd
