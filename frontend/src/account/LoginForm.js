@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import styles from "../assets/sass/account/LoginForm.scss";
 
 export default function LoginForm() {
-  const [memberVo, setMemberVo] = useState({ id: "", password: "" });
+  const [memberVo, setMemberVo] = useState({ email: "", password: "" });
   const [loginFail, setLoginFail] = useState(false);
 
   const login = (e) => {
@@ -55,7 +55,7 @@ export default function LoginForm() {
             variant="outlined"
             size="medium"
             autoComplete="off"
-            name="id"
+            name="email"
             value={memberVo.id}
             onChange={(e) => handleChange(e)}
           />
