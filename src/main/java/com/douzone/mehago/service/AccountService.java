@@ -36,4 +36,7 @@ public class AccountService {
     public void changeRandomPassword(String randomPassword, String email){
         accountRepository.updateRendomPassword(randomPassword, email);
     }
+    public Account getAccount(String email, String password) {
+        return accountRepository.findByEmailAndPassword(email, password);
+    }
 }

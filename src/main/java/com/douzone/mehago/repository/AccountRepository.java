@@ -55,4 +55,11 @@ public class AccountRepository {
       sqlSession.update("account.updateRendomPassword", map);
     }
 
+    public Account findByEmailAndPassword(String email, String password) {
+        Map<String, String> map = new HashMap<>();
+		map.put("e", email);
+		map.put("p", password);
+        return sqlSession.selectOne("account.findByEmailAndPassword", map);
+    }
+
 }
