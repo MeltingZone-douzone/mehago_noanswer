@@ -13,31 +13,40 @@
 		]]>
 	</insert>
 
-	<select id="findByEmailAndPassword" parameterType="map"
-		resultType="accountvo">
+	<select id="isExistEmail" parameterType="string" resultType="String">
 		<![CDATA[
-			select id, name, role
-				from account 
-				where email = #{e} 
-				and password = #{p}
+			select 
+				email
+			from 
+				account
+			where 
+				email = #{email}
 		]]>
 	</select>
 
-	<select id="findById" parameterType="Long" resultType="accountvo">
+	<select id="isExistNickName" parameterType="string" resultType="String">
 		<![CDATA[
-			select id, email, name, gender
-				from account
-				where id = #{id}
+			select 
+				nickName
+			from 
+				account
+			where 
+				nickName = #{nickName}
 		]]>
 	</select>
 
-	<select id="findByEmail" parameterType="string" resultType="boolean">
+	<select id="isExistPhoneNumber" parameterType="string" resultType="String">
 		<![CDATA[
-			select id, email, name, gender
-				from account
-				where email = #{email}
+			select 
+				phone_number
+			from 
+				account
+			where 
+				phone_number = #{phone_number}
 		]]>
 	</select>
+
+
 
 	<update id="update" parameterType="accountvo">
 		<choose>

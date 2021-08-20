@@ -17,9 +17,18 @@ public class AccountRepository {
 		return result == 1;
 	  }
 
+    public String isExistEmail(String email) {
+        return sqlSession.selectOne("account.isExistEmail",email);
+    }
 
-    public Boolean existsByEmail(String email) {
-      return sqlSession.selectOne("account.findByEmail",email);
+
+    public String isExistNickName(String nickName) {
+        return sqlSession.selectOne("account.isExistNickName", nickName);
+    }
+
+
+    public String isExistPhoneNumber(String phoneNumber) {
+        return sqlSession.selectOne("account.isExistPhoneNumber",phoneNumber);
     }
 
 }

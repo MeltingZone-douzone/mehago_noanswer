@@ -2,73 +2,110 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import styles from "../assets/scss/signUp/SignUpForm.scss";
+import axios from "axios";
 
 export default function SignUpForm() {
-  const [user, setUser] = useState({ email: '', password: '', nickName: '',  phoneNumber: 0});
-
-  // 핸드폰 번호 체크 정규식
-  /* function isCelluar(asValue) {
-    const regExp = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
-    console.log('asValue: ', asValue);
-    return regExp.test(asValue); // 형식에 맞는 경우 true 리턴
-  } */
+  const [user, setUser] = useState({ email: '', password: '', nickName: '',  phoneNumber: 0});  
+  const headers = {
+    "Content-Type": "application/json; charset=UTF-8",
+    "Accept": "application/json"
+  }
+// kwb103@naver.com
+// dfdf@dfdf.com
+  const isExist = (name, value) => {
+    // console.log(name, " : ", value);
+    axios.post('/api/account/sign-up/valid-' + name,
+              value,
+              { headers: {"Content-Type": "text/plain"} }
+    )
+      .then(response => {
+        console.log(response.data); // null 이면 사용가능한 이메일
+        // if(response.data !== 'null') {
+        if(response.data !== null) {  // 이미 있을 경우
+          // console.log("이미 있는 ",name," 입니다"); // TODO 
+          console.log(`이미 있는 ${name} : ${response.data}`);
+        }
+      })
+  }
 
 
   const validation = {
     checkEmail: function(e) {
-        const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
-
-    },
-    checkPassword: function(e)  {
-         //  8 ~ 10자 영문, 숫자 조합
-        const regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/
-    },
-    checkPhoneNumber: function(e)  {
-        const regExp = /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/ // (-) 없는 정규식 
-        const num = e.target.value;
-        const result = phoneNumberRegExp.test(num);
-        console.log(num);
-        console.log(result);
-        if(result) {
-          // validation 처리
+        if((e.target.value) === '') {
+          return false;
+        }
+        const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
+        const data = regExp.test(e.target.value);
+        console.log(data? "유효성ok" : "유효성ㄴㄴ");
+        if(data) {
+          isExist(e.target.name, e.target.value)
         }
     },
+    checkPassword: function(e)  {
+        if((e.target.value) === '') {
+          return false;
+        }
+        //  8 ~ 10자 영문, 숫자 조합
+        const regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/
+        console.log(e.target.value);
+        const data = regExp.test(e.target.value);
+        console.log(data? "유효성ok" : "유효성ㄴㄴ");
+        if(data) {
+          isExist(e.target.name, e.target.value)
+        }
+    },
+    checkNickName: function(e) {
+        if((e.target.value) === '') {
+          return false;
+        }
+        isExist(e.target.name, e.target.value)
+        // DB 중복체크
+    },
+    checkPhoneNumber: function(e)  {
+        if((e.target.value) === '') {
+          return false;
+        }
+        const regExp = /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/ // (-) 없는 정규식 
+        console.log(e.target.value);
+        const data = regExp.test(e.target.value);
+        console.log(data? "유효성ok" : "유효성ㄴㄴ");
+        if(data) {
+          isExist(e.target.name, e.target.value)
+        }
+    },
+  // const validation = (e) => {
+  //   switch(e.target.name) {
+  //     case "email": { // 이메일 정규식, DB중복체크
+  //       const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
+  //     }
+  //     case "password": { // 비밀번호 정규식
+  //       const regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/
+  //     }
+  //     case "nickName":  // DB 중복체크
+  //     case "phoneNumber": { // 휴대폰 번호 정규식
+  //       const regExp = /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/ // (-) 없는 정규식 
+  //     }
+      
+  //   }
+  // }
 
   }
 
 
   const handleChange = (e) => {
-      const phoneNumberRegExp = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
-      // console.log(e.target.value);
       const { name, value } = e.target;
       setUser({
           ...user,
           [name]: value
       })
-
-      // if(user.phoneNumber) {
-      //   if(phoneNumberRegExp.test(user.phoneNumber)){
-      //     const response = await fetch('/spring/account/pass')
-      //   }
-      // }
-      // setUser({[name]: value});
   }
-
-  // const handleBlur = (e) => {
-  //   const phoneNumberRegExp = /^01([0|1|6|7|8|9]?)([0-9]{3,4})([0-9]{4})$/; // (-) 없는 정규식 
-  //   const num = e.target.value;
-  //   console.log(num);
-  //   console.log(phoneNumberRegExp.test(num));
-  // }
-
-
 
   const apiFunction = {
     emailCheck: function() {
     },
     SignUp: async function(user) {
         console.log(user);
-        const response = await fetch('/spring/account/sign-up', {
+        const response = await fetch('/api/account/sign-up', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(user)
@@ -104,9 +141,6 @@ export default function SignUpForm() {
             onChange={handleChange}
             onBlur={validation.checkEmail}
           />
-          <Button variant="contained" color="primary">
-            중복체크
-          </Button>
         </div>
         <div className={styles.Password}>
           <TextField
@@ -159,7 +193,7 @@ export default function SignUpForm() {
           >
             가입하기
           </Button>
-          <br/>
+          {/* <br/>
           <Button 
             className={styles.SignUpCancel}
             variant="outlined" 
@@ -167,7 +201,7 @@ export default function SignUpForm() {
             size="large"
             >
               취소하기
-          </Button>
+          </Button> */}
         </div>
       </form>
     </div>

@@ -26,8 +26,13 @@
     vertical-align: top;
     white-space: normal;
     width: 100%;
-    .Password {
-      margin-top: 10px;
+    .Password,
+    .NickName {
+      margin-top: 30px;
+    }
+    .PhoneNumber {
+      margin-top: 30px;
+      margin-bottom: 30px;
     }
     .EmailInput,
     .NickNameInput,

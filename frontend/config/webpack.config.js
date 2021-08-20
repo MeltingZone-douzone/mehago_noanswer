@@ -35,8 +35,7 @@ module.exports = (env) => ({
         host: "0.0.0.0",
         port: 9999,
         proxy:{
-            '/api': 'http://localhost:8888',
-            '/spring': 'http://localhost:8080'
+            '/api': 'http://localhost:8080',
         },
         inline: true,
         liveReload: true,
