@@ -31,4 +31,8 @@ public class AccountRepository {
 
     }
 
+    public Account login(Account account) {
+        return sqlSession.selectOne("account.findByEmailAndPassword",account);
+    }
+
 }
