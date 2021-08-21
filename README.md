@@ -19,7 +19,7 @@ spring-boot run (backend 나중에 추가해야됨 npm run dev:backend)
 $ npm run dev
 ```
 
-frontend와 통신
+springboot와 통신
 경로 : /api
 
 backend와 통신
