@@ -42,7 +42,7 @@ public class JwtTokenUtil{
                         .withIssuer(issuer)
                         .withClaim("userNo", account.getNo())
                         .withClaim("userNickname", account.getNickname())
-                        .withExpiresAt(new Date(ACCESS_TOKEN_EXPIRE_TIME))
+                        .withExpiresAt(new Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRE_TIME))
                         .sign(generateAlgorithm());
 
         } catch (JWTCreationException exception){

@@ -1,5 +1,5 @@
 import { createTheme } from "@material-ui/core";
-import { colors } from "../Colors";
+import { colors } from "../properties/Colors";
 
 export const theme = createTheme({
     palette: {

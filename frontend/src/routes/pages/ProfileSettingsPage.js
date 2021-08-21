@@ -14,6 +14,7 @@ export default function ProfileSettingsPage({match}) {
         console.log(getUserInfo());
     },[])
 
+
     return(
         <Template>
             <UserProfile user={userInfo} />
