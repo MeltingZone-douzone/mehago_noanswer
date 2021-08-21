@@ -7,7 +7,7 @@ import localStorage from "local-storage";
 
 import NonMembers from "../components/NonMember";
 
-export default function LoginForm() {
+export default function LoginForm({history}) {
   const [memberVo, setMemberVo] = useState({ email: "", password: "" });
   const [loginFail, setLoginFail] = useState(false);
 
@@ -31,12 +31,15 @@ export default function LoginForm() {
               return;
             } // 성공하면 메인화면 가기
             localStorage.set("token", res.data);
+            history.push("/");
           }
         });
     } catch (err) {
       console.error(err);
     }
   };
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);

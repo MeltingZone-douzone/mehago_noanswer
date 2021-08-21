@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -11,6 +11,8 @@ import styles from "../../assets/sass/LoginPage.scss";
 
 export default function AccountPage({ match }) {
   const location = useLocation();
+  useEffect(()=>{console.log(location)},[location]);
+
   return (
     <div className={styles.PageWrapper}>
       <div className={styles.Page}>
@@ -42,6 +44,7 @@ export default function AccountPage({ match }) {
                       exact
                       path={`${match.path}/login`}
                       component={LoginForm}
+                     
                     />
                     <Route
                       exact
