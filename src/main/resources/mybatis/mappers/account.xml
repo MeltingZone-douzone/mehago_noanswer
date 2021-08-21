@@ -5,21 +5,72 @@
 
 <mapper namespace="account">
 
+
+
 	<insert id="insert" parameterType="account">
 		<![CDATA[
 			insert 
 				into account 
-				values(null,#{email},#{password},#{nickname},#{phoneNumber},#{name},#{thumbnailUrl}, now());
+				values(null, #{email}, #{password}, #{nickname}, #{phoneNumber}, #{name}, null, now());
 		]]>
 	</insert>
 
-	<select id="findById" parameterType="Long" resultType="account">
+	<select id="isExistEmail" parameterType="string" resultType="String">
 		<![CDATA[
-			select id, email, name, gender
-				from account
-				where id = #{id}
+			select 
+				email
+			from 
+				account
+			where 
+				email = #{email}
 		]]>
 	</select>
+
+	<select id="isExistNickname" parameterType="string" resultType="String">
+		<![CDATA[
+			select 
+				nickname
+			from 
+				account
+			where 
+				nickname = #{nickname}
+		]]>
+	</select>
+
+	<select id="isExistPhoneNumber" parameterType="string" resultType="String">
+		<![CDATA[
+			select 
+				phone_number
+			from 
+				account
+			where 
+				phone_number = #{phone_number}
+		]]>
+	</select>
+
+
+
+	<update id="update" parameterType="account">
+		<choose>
+			<when test='password == ""'>
+				<![CDATA[
+				update account
+			       set name=#{name },
+			           gender=#{gender }
+			     where id=${id }
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				update account
+				   set name=#{name },
+				       password=#{password }, 
+				       gender=#{gender }
+				 where id=${id }	
+				]]>
+			</otherwise>
+		</choose>
+	</update>
 
 	<update id="updateNickname" parameterType="account">
 		<![CDATA[

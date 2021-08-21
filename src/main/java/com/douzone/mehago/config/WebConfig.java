@@ -88,6 +88,7 @@ public class WebConfig implements WebMvcConfigurer {
 		MappingJackson2HttpMessageConverter messageConverter = new MappingJackson2HttpMessageConverter(builder.build());
 		messageConverter
 				.setSupportedMediaTypes(Arrays.asList(new MediaType("application", "json", Charset.forName("utf-8"))));
+
 		return messageConverter;
 	}
 
@@ -96,6 +97,7 @@ public class WebConfig implements WebMvcConfigurer {
 		converters.add(stringHttpMessageConverter());
 		converters.add(mappingJackson2HttpMessageConverter());
 	}
+
 	/*
 	 * // Resource Mapping(URL Magic Mapping)
 	 * 

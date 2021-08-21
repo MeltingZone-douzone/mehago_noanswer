@@ -1,0 +1,33 @@
+.Links {
+  padding-top: 5px;
+  margin-top: 20%;
+  border-top: 1px solid #8d8d8d;
+  ul {
+    display: inline-block;
+
+    li {
+      float: left;
+      position: relative;
+
+      &:first-child {
+        margin-left: 0;
+        padding-left: 0;
+        &::after {
+          content: " |";
+          color: #8d8d8d;
+        }
+      }
+      a {
+        color: #8d8d8d;
+        font-size: 14px;
+        text-decoration: none;
+      }
+    }
+  }
+  .MemberJoin {
+    font-size: 14px;
+    color: #8d8d8d;
+    text-decoration: none;
+    float: right;
+  }
+}

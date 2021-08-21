@@ -27,7 +27,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequestMapping("/api/account")
 @Controller
-@RequiredArgsConstructor
 public class AccountController {
 
     @Autowired
@@ -51,25 +50,6 @@ public class AccountController {
         System.out.println(data != null ? "이미있노 그래서 email고대로감" : "오 없다 그걸로해라 null로감");
         // return ResponseEntity.ok().build();
         return ResponseEntity.ok().body(data != null ? data : "null");
-    }
-
-    @GetMapping("/login")
-    public ResponseEntity<?> loginFail() {
-        System.out.println("loginFail");
-        return ResponseEntity.ok().body(CommonResponse.fail("로그인 실패"));
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Account account) {
-        System.out.println("Controller");
-
-        Account result = accountService.getAccount(account);
-        if (result == null) {
-            return ResponseEntity.ok().body("cant find Account");
-        }
-        String token = jwtTokenUtil.generateAccessToken(result);
-        return ResponseEntity.ok().body(token);
-
     }
 
     @GetMapping("/get-user")
@@ -122,5 +102,4 @@ public class AccountController {
 
         return ResponseEntity.ok().build();
     }
-
 }

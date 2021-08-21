@@ -6,14 +6,36 @@ import com.douzone.mehago.vo.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    public boolean signUp(Account account) {
+        return accountRepository.insert(account);
+    }
+
+    public String isExist(String name, String value) {
+        String result = "";
+        switch (name) {
+            case "email":
+                result = accountRepository.isExistEmail(value);
+                System.out.println("email result는 " + result);
+                break;
+
+            case "nickname":
+                result = accountRepository.isExistNickname(value);
+                System.out.println("nickname result는 " + result);
+                break;
+
+            case "phoneNumber":
+                result = accountRepository.isExistPhoneNumber(value);
+                System.out.println("phoneNumber result는 " + result);
+                break;
+        }
+        return result;
+    }
 
     public void updateNickname(Account account) {
 
@@ -25,38 +47,6 @@ public class AccountService {
 
     public void updateUserInfo(Account account) {
 
-    }
-
-    public String isExist(String name, String value) {
-        String result = "";
-        switch (name) {
-            case "email":
-                result = accountRepository.isExistEmail(value);
-                System.out.println("email result는 " + result);
-                break;
-
-            case "nickName":
-                result = accountRepository.isExistNickName(value);
-                System.out.println("nickName result는 " + result);
-                break;
-
-            case "phoneNumber":
-                result = accountRepository.isExistPhoneNumber(value);
-                System.out.println("phoneNumber result는 " + result);
-                break;
-        }
-        return result;
-    }
-
-    public void signUp(Account account) {
-        accountRepository.signUp(account);
-    }
-
-    public Account getAccount(String email, String password) {
-        Account account = new Account();
-        account.setEmail(email);
-        account.setPassword(password);
-        return getAccount(account);
     }
 
     public Account getAccount(Account account) {

@@ -37,7 +37,6 @@ module.exports = (env) => ({
         proxy:{
             '/api': 'http://localhost:8080',
             '/chat': 'http://localhost:8888'
-            
         },
         inline: true,
         liveReload: true,
