@@ -31,7 +31,7 @@ public class MailService {
             mailHandler.setText(htmlContent, true);
 
             mailHandler.send();
-            System.out.println("send");
+            System.out.println("send완료");
         }
         catch(Exception e){
             e.printStackTrace();

@@ -5,21 +5,12 @@
 
 <mapper namespace="account">
 
-	<select id="findByEmailAndPassword" parameterType="map" resultType="account">
-		<![CDATA[
-			SELECT 
-				no, name
-			FROM 
-				account 
-			WHERE email = #{email} AND password = #{password}
-		]]>
-	</select>
 
 	<insert id="insert" parameterType="account">
 		<![CDATA[
 			insert 
 				into account 
-				values(null,#{email},#{password},#{nickname},#{phoneNumber},#{name},#{thumbnailUrl}, now());
+				values(null, #{email}, #{password}, #{nickname}, #{phoneNumber}, #{name}, null, now());
 		]]>
 	</insert>
 
@@ -34,14 +25,14 @@
 		]]>
 	</select>
 
-	<select id="isExistNickName" parameterType="string" resultType="String">
+	<select id="isExistNickname" parameterType="string" resultType="String">
 		<![CDATA[
 			select 
-				nickName
+				nickname
 			from 
 				account
 			where 
-				nickName = #{nickName}
+				nickname = #{nickname}
 		]]>
 	</select>
 
@@ -108,7 +99,6 @@
 	<select id="searchAccount" parameterType="map"
 		resultType="account">
 		<![CDATA[
-<<<<<<< HEAD
 			select email, password
 				from account 
 				where name = #{name} 
@@ -134,14 +124,6 @@
 		]]>
 	</update>
 
-=======
-		select no, email, nickname
-		  from account 
-		 where email = #{email } 
-		   and password = #{password } 
-		   ]]>
-	</select>
-
 	<update id="updateToken" parameterType="account">
 		<![CDATA[
 				update account 
@@ -158,5 +140,5 @@
 		 where no = #{no } 
 		   ]]>
 	</select>
->>>>>>> origin/sewon
+
 </mapper>

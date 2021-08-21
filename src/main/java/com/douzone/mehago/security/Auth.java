@@ -10,7 +10,8 @@ import java.lang.annotation.Target;
 // @Retention 어노테이션으로 어느 시점까지 어노테이션의 메모리를 가져갈 지 설정. default는 class임
 // RetentionPolicy는 RetentionPolicy의 값을 넘겨주는 것으로 어노테이션의 메모리 보유 범위가 결정됨
 public @interface Auth {
-//	public String value() default "USER";	// requestParam 의 기본값은 value로 되어있음 value=""
+	// public String value() default "USER"; // requestParam 의 기본값은 value로 되어있음
+	// value=""
 	// public enum Role { ADMIN, USER }
 	// public Role role() default Role.USER;
 

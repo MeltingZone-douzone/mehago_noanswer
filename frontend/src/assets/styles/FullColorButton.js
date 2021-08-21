@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from './Colors';
+import { colors } from './properties/Colors';
 
 const FullColorButton = styled.button`
     color:#fff;

@@ -47,7 +47,6 @@ public class MailHandler {
     public void send() {
         try {
             sender.send(message);
-            System.out.println("sender.send(message)");
         }catch(Exception e) {
             e.printStackTrace();
         }

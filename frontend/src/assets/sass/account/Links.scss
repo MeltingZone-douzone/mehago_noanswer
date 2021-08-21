@@ -1,4 +1,5 @@
 .Links {
+  margin-top: auto;
   padding-top: 5px;
 
   ul {
@@ -12,7 +13,7 @@
         margin-left: 0;
         padding-left: 0;
         &::after {
-          content: " |";
+          content: " | ";
           color: #8d8d8d;
         }
       }
