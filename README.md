@@ -58,7 +58,7 @@ backend와 통신
                     |--- application.yml
 </pre>
 
-ResponseEntity
+JWT <https://github.com/MeltingZone-douzone/mehago/tree/main/docs/jwt/>
 
 #### frontend
 
