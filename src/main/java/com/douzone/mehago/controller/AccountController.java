@@ -1,13 +1,10 @@
 package com.douzone.mehago.controller;
 
-<<<<<<< HEAD
-=======
 import java.util.concurrent.TimeUnit;
 
 import javax.crypto.spec.SecretKeySpec;
 
 import com.douzone.mehago.dto.CommonResponse;
->>>>>>> origin/sewon
 import com.douzone.mehago.security.Auth;
 import com.douzone.mehago.service.AccountService;
 import com.douzone.mehago.service.MailService;
@@ -18,10 +15,6 @@ import com.douzone.mehago.utils.JwtDecoder;
 import com.douzone.mehago.utils.JwtTokenUtil;
 import com.douzone.mehago.utils.RandomPassword;
 
-<<<<<<< HEAD
-=======
-import org.apache.tomcat.util.net.openssl.ciphers.Encryption;
->>>>>>> origin/sewon
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,10 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-<<<<<<< HEAD
 import javax.crypto.spec.SecretKeySpec;
-=======
->>>>>>> origin/sewon
 
 import org.apache.tomcat.util.net.openssl.ciphers.Encryption;
 
@@ -45,31 +35,10 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class AccountController {
     
-<<<<<<< HEAD
     private final MailService mailService;
     private final JwtTokenUtil jwtTokenUtil;
     private final JwtDecoder jwtDecoder;
     private final AccountService accountService;
-=======
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-    @Autowired
-    private JwtDecoder jwtDecoder;
-    @Autowired
-    private AccountService accountService;
-    
-@Auth
-@PostMapping("/test")
-public ResponseEntity<?> test(){
-    return ResponseEntity.ok().build();
-}
-
-@Auth
-@GetMapping("/test")
-public ResponseEntity<?> test2(){
-    return ResponseEntity.ok().build();
-}
->>>>>>> origin/sewon
 
     @Auth
     @GetMapping("/test")
@@ -147,20 +116,6 @@ public ResponseEntity<?> test2(){
         
         return ResponseEntity.ok().build();
     }
-<<<<<<< HEAD
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Account account){  
-        Account result = accountService.getAccount(account);  
-       
-        return ResponseEntity.ok().body(result == null ? "cant find Account" : result);         
-    }
-=======
-
-}
->>>>>>> origin/sewon
-
-
-
 
     @PostMapping("/findByNameAndEmail")
     public ResponseEntity<?> findByNameAndEmail(@RequestBody Account account, Mail mailDto){

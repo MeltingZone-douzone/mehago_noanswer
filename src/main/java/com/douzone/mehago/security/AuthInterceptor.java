@@ -4,29 +4,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-<<<<<<< HEAD
-import com.douzone.mehago.vo.Account;
-
-=======
 import com.douzone.mehago.service.AccountService;
 import com.douzone.mehago.utils.JwtDecoder;
 import com.douzone.mehago.vo.Account;
 
 import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> origin/sewon
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 //		조건을 따져보고 해당 핸들러를 실행시켜
-<<<<<<< HEAD
-=======
 		@Autowired
 		private JwtDecoder jwtDecoder;
 		@Autowired
 		private AccountService accountService;
 
->>>>>>> origin/sewon
 		@Override
 		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 				throws Exception {
@@ -59,30 +51,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			}
 			
 //			 6. @Auth가 붙어있기 때문에 인증(Authenfication) 여부 확인
-<<<<<<< HEAD
-//			session체크 / session이 없는 경우                 -> session이 언제없노
-			HttpSession session = request.getSession();
-			if(session == null ) {
-				System.out.println("session == null in AuthInterceptor");
-				response.sendRedirect(request.getContextPath()+"/api/account/login");
-//				request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
-				return false;
-			}
-
-			
-			
-//			session이 존재하지만 authUser가 없는 경우
-			Account authUser = (Account)session.getAttribute("authUser");
-			if(authUser == null) {
-				System.out.println("authUser == null in AuthInterceptor");
-//				request.getRequestDispatcher("/WEB-INF/views/user/login.jsp").forward(request, response);
-				response.sendRedirect(request.getContextPath() + "/api/account/login");
-				return false;
-			}
-
-
-			
-=======
 			
 			if(request.getHeader("Authorization") == null ){
 				response.getWriter().write("cant find Account");   
@@ -96,26 +64,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			Account account = accountService.getAccountByToken(decodeAccount);
 			System.out.println(account.toString()); 
 
->>>>>>> origin/sewon
 			///////////////////////////////////////////////////////////////////
 			
 //			7. 권한(Authorization) 체크를 위해서 @Auth의 role 가져오기 ("ADMIN", "USER")
 			
-<<<<<<< HEAD
-			String role = auth.user().toString();
-=======
-			String role = auth.role().toString();
->>>>>>> origin/sewon
+			// String role = auth.role().toString();
 
 			// TODO role 대신 회원/비회원 구분할 거 찾기
 			// String authRole = authUser.getRole();
 			// System.out.println(role + " " + authRole);
 			
 /*
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/sewon
 			if("ADMIN".equals(role)) {
 //				if(!"ADMIN".equals(authRole)) {
 				if("USER".equals(authRole)) {
@@ -133,8 +92,4 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		// authUser의 role: "ADMIN"
 			return true;
 		}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/sewon

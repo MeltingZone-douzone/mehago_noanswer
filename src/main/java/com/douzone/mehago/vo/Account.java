@@ -13,9 +13,6 @@ public class Account {
     private String name;
     private String phoneNumber;
     private String thumbnailUrl;
-<<<<<<< HEAD
-    // created_at
-=======
     private String token;
 
     @Override
@@ -71,5 +68,4 @@ public class Account {
 	public void setToken(String token) {
 		this.token = token;
 	}
->>>>>>> origin/sewon
 }

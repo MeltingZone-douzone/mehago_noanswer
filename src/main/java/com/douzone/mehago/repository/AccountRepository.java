@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AccountRepository {
-<<<<<<< HEAD
     
     @Autowired
     private SqlSession sqlSession;
@@ -27,11 +26,6 @@ public class AccountRepository {
 		  int result = sqlSession.insert("account.insert", vo);
 		  return result == 1;
 	  }
-=======
- 
-    @Autowired
-    private SqlSession sqlSession;
->>>>>>> origin/sewon
 
 
     public Boolean existsByEmail(String email) {
@@ -81,9 +75,6 @@ public class AccountRepository {
       sqlSession.update("account.updateRendomPassword", map);
     }
 
-<<<<<<< HEAD
-}
-=======
     public boolean updateToken(Account account) {
         return sqlSession.update("account.updateToken", account) == 1 ? true : false;
     }
@@ -93,4 +84,3 @@ public class AccountRepository {
     }
 
 }
->>>>>>> origin/sewon

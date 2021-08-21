@@ -19,88 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter{
-<<<<<<< HEAD
-   
-   @Autowired
-   private AccountService accountService;
-   @Autowired
-    private JwtTokenUtil jwtTokenUtil;
-   
-   @Override
-   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-         throws Exception {
-            String body = null;
-            StringBuilder stringBuilder = new StringBuilder();
-            BufferedReader bufferedReader = null;
-       
-            try {
-               InputStream inputStream = request.getInputStream();
-               if (inputStream != null) {
-                  bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                  char[] charBuffer = new char[128];
-                  int bytesRead = -1;
-                  while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
-                     stringBuilder.append(charBuffer, 0, bytesRead);
-                  }
-               }
-            } catch (IOException ex) {
-               throw ex;
-            } finally {
-               if (bufferedReader != null) {
-                  try {
-                     bufferedReader.close();
-                  } catch (IOException ex) {
-                     throw ex;
-                  }
-               }
-            }
-       
-            body = stringBuilder.toString();
-
-            Account account = new Account();
-            account.setEmail(body.split("\"")[3]);
-            account.setPassword(body.split("\"")[7]);
-            Account result = accountService.getAccount(account); 
-            
-            response.setContentType("application/json");
-             response.setCharacterEncoding("UTF-8");
-             if(result == null){
-               response.getWriter().write("cant find Account");   
-               return false;   
-            }
-            String token = jwtTokenUtil.generateAccessToken(result);
-             response.getWriter().write(token);
-            return false;
-         }
-
-//       System.out.println(request.getInputStream());
-
-//       String email = "";
-//       String password = "";
-
-//       Account account = new Account();
-
-//       account.setPassword(password);
-//       account.setEmail(email);
-
-//       Account authUser = accountService.getAccount(account);   
-//       System.out.println(email+ password);
-
-//       if(authUser == null) {
-//          System.out.println("로그인 실패 in LoginInterceptor");
-//          return false;
-//       }
-      
-// //      세션 처리
-//       System.out.println("로그인 성공 in LoginInterceptor");
-//       System.out.println(authUser);
-//       HttpSession session =  request.getSession(true);
-//       session.setAttribute("authUser", authUser);
-//       response.sendRedirect(request.getContextPath());
-//       return false; 
-//    }
-
-=======
 	
 	@Autowired
 	private AccountService accountService;
@@ -156,5 +74,4 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
  				response.getWriter().write(token);
 				return false;
 			}
->>>>>>> origin/sewon
 }

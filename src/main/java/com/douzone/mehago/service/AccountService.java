@@ -20,7 +20,6 @@ public class AccountService {
         return accountRepository.insert(account);
     }
 
-<<<<<<< HEAD
     public String isExist(String name, String value) {
         String result = "";
         switch (name) {
@@ -33,10 +32,6 @@ public class AccountService {
                 result = accountRepository.isExistNickName(value);
                 System.out.println("nickName result는 "+ result);
             break;
-=======
-    @Autowired
-    private AccountRepository accountRepository;
->>>>>>> origin/sewon
 
             case "phoneNumber":
                 result = accountRepository.isExistPhoneNumber(value);

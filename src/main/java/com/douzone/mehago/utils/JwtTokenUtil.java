@@ -40,26 +40,15 @@ public class JwtTokenUtil{
                         .withIssuer(issuer)
                         .withClaim("userNo", account.getNo())
                         .withClaim("userNickname", account.getNickname())
-<<<<<<< HEAD
-                        // .withExpiresAt(expiresAt)
-                        .sign(generateAlgorithm());  // 첫 번째 인자에는 payload가 들어가고 두 번째 인자에는 비밀키 값이 들어감
-=======
                         .withExpiresAt(new Date(System.currentTimeMillis()+ACCESS_TOKEN_EXPIRE_TIME))
                         .sign(generateAlgorithm());
->>>>>>> origin/sewon
 
         } catch (JWTCreationException exception){
             //Invalid Signing configuration / Couldn't convert Claims.
             
             // TODO: Exception
         } catch (Exception e) {
-<<<<<<< HEAD
-            // TODO: handle exception
-            // log.error(e.getMessage());
-            e.getStackTrace();
-=======
             e.printStackTrace();
->>>>>>> origin/sewon
         }
 
         return token;

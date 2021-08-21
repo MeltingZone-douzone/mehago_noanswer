@@ -5,7 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-<<<<<<< HEAD
 @Target({ElementType.METHOD, ElementType.TYPE}) // METHOD, TYPE(class)에 붙일 수 있음
 @Retention(RetentionPolicy.RUNTIME) // 컴파일이된 클래스파일에도 @Auth가 붙음 CLASS면 떼어짐
 // @Retention 어노테이션으로 어느 시점까지 어노테이션의 메모리를 가져갈 지 설정. default는 class임
@@ -16,13 +15,4 @@ public @interface Auth {
 	// public Role role() default Role.USER;
 
 	public String user() default "USER";
-=======
-@Target({ElementType.METHOD, ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Auth {
-//	public String value() default "";
-	public String role() default "USER";
-	public boolean test() default false;
-	
->>>>>>> origin/sewon
 }

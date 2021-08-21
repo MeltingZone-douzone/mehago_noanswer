@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 import React, { useEffect } from "react";
 import { Redirect, Route } from 'react-router-dom';
 import { Switch, useLocation } from "react-router-dom";
-=======
-import React from "react";
-import { Switch, Route, useLocation } from "react-router-dom";
->>>>>>> origin/sewon
 import { AnimatePresence, motion } from "framer-motion";
 
 import Links from "../../components/Links";
@@ -17,22 +12,9 @@ import styles from "../../assets/sass/LoginPage.scss";
 
 export default function AccountPage({ match }) {
   const location = useLocation();
+  useEffect(()=>{console.log(location)},[location]);
+
   return (
-<<<<<<< HEAD
-    <div className={styles.MainPageWrapper}>
-      <div className={styles.InitialView}>
-        <div className={styles.ContentWrapper}>
-          <div className={styles.Content}>
-            <div className={styles.LogoWrapper}>
-              <div className={styles.Logo}>
-                <a href="#">
-                  <img
-                    src="../../assets/images/wehago.svg"
-                    height="24"
-                    alt="MEHAGO"
-                  />
-                </a>
-=======
     <div className={styles.PageWrapper}>
       <div className={styles.Page}>
         <div className={styles.InitialView}>
@@ -48,7 +30,6 @@ export default function AccountPage({ match }) {
                     />
                   </a>
                 </div>
->>>>>>> origin/sewon
               </div>
               <AnimatePresence>
                 <Switch location={location} key={location.pathname}>
@@ -64,6 +45,7 @@ export default function AccountPage({ match }) {
                       exact
                       path={`${match.path}/login`}
                       component={LoginForm}
+                     
                     />
                     <Route
                       exact
