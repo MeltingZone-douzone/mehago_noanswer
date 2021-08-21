@@ -18,60 +18,60 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class LoginInterceptor extends HandlerInterceptorAdapter{
-	
+public class LoginInterceptor extends HandlerInterceptorAdapter {
+
 	@Autowired
 	private AccountService accountService;
 	@Autowired
-    private JwtTokenUtil jwtTokenUtil;
-	
+	private JwtTokenUtil jwtTokenUtil;
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-				String body = null;
-				StringBuilder stringBuilder = new StringBuilder();
-				BufferedReader bufferedReader = null;
-		 
+		String body = null;
+		StringBuilder stringBuilder = new StringBuilder();
+		BufferedReader bufferedReader = null;
+
+		try {
+			InputStream inputStream = request.getInputStream();
+			if (inputStream != null) {
+				bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+				char[] charBuffer = new char[128];
+				int bytesRead = -1;
+				while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+					stringBuilder.append(charBuffer, 0, bytesRead);
+				}
+			}
+		} catch (IOException ex) {
+			throw ex;
+		} finally {
+			if (bufferedReader != null) {
 				try {
-					InputStream inputStream = request.getInputStream();
-					if (inputStream != null) {
-						bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-						char[] charBuffer = new char[128];
-						int bytesRead = -1;
-						while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
-							stringBuilder.append(charBuffer, 0, bytesRead);
-						}
-					}
+					bufferedReader.close();
 				} catch (IOException ex) {
 					throw ex;
-				} finally {
-					if (bufferedReader != null) {
-						try {
-							bufferedReader.close();
-						} catch (IOException ex) {
-							throw ex;
-						}
-					}
 				}
-		 
-				body = stringBuilder.toString();
-
-				Account account = new Account();
-				account.setEmail(body.split("\"")[3]);
-				account.setPassword(body.split("\"")[7]);
-				Account result = accountService.getAccount(account); 
-				
-				response.setContentType("application/json");
- 				response.setCharacterEncoding("UTF-8");
-				 if(result == null){
-					response.getWriter().write("cant find Account");   
-					return false;   
-				}
-				String token = jwtTokenUtil.generateAccessToken(result);
-				account.setToken(token);
-
-				accountService.updateToken(account);
- 				response.getWriter().write(token);
-				return false;
 			}
+		}
+
+		body = stringBuilder.toString();
+
+		Account account = new Account();
+		account.setEmail(body.split("\"")[3]);
+		account.setPassword(body.split("\"")[7]);
+		Account result = accountService.getAccount(account);
+
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		if (result == null) {
+			response.getWriter().write("cant find Account");
+			return false;
+		}
+		String token = jwtTokenUtil.generateAccessToken(result);
+		account.setToken(token);
+
+		accountService.updateToken(account);
+		response.getWriter().write(token);
+		return false;
+	}
 }

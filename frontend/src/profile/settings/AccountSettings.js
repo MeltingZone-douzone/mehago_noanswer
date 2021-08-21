@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { colors } from '../../assets/styles/Colors';
+import { colors } from '../../assets/styles/properties/Colors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
 

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import styles2 from '../assets/sass/account/Form.scss';
 import styles from "../assets/sass/account/SignUpForm.scss";
 import { signUpApi } from "../../api/AccountApi";
+import { Redirect } from "react-router-dom";
 
 export default function SignUpForm() {
     const [user, setUser] = useState({ email: '', password: '', nickName: '',  phoneNumber: 0});
@@ -18,9 +20,9 @@ export default function SignUpForm() {
     const signUp = () => {
       signUpApi(user);
     }
-
+    
     return (
-        <div className={styles.SignUpForm}>
+        <div className={styles2.ContentContainer}>
           <div className={styles.Message}>
             <h1>회원가입</h1>
           </div>
@@ -38,9 +40,6 @@ export default function SignUpForm() {
                 onChange={handleChange}
                 // onBlur={validation.checkEmail}
               />
-              <Button variant="contained" color="primary">
-                중복체크
-              </Button>
             </div>
             <div className={styles.Password}>
               <TextField
@@ -99,7 +98,6 @@ export default function SignUpForm() {
                 variant="outlined" 
                 color="primary"
                 size="large"
-
                 >
                   취소하기
               </Button>

@@ -26,9 +26,6 @@ spring:
   config:
     activate:
       on-profile: dev
-  jwt:
-    secret: Sewon
-    issuer: Mehago
   devtools:
     livereload:
       enabled: true
@@ -37,6 +34,10 @@ spring:
     url: jdbc:mysql://192.168.80.112:3307/mehago?characterEncoding=utf8
     username: mehago
     password: mehago
+  jwt:
+    secret: PeAChHOng
+    issuer: Mehago
+
 ---
 # production profile - spring boot configuration
 spring:
