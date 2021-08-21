@@ -20,6 +20,7 @@ public class AccountService {
         return accountRepository.insert(account);
     }
 
+<<<<<<< HEAD
     public String isExist(String name, String value) {
         String result = "";
         switch (name) {
@@ -32,6 +33,10 @@ public class AccountService {
                 result = accountRepository.isExistNickName(value);
                 System.out.println("nickName result는 "+ result);
             break;
+=======
+    @Autowired
+    private AccountRepository accountRepository;
+>>>>>>> origin/sewon
 
             case "phoneNumber":
                 result = accountRepository.isExistPhoneNumber(value);
@@ -71,5 +76,14 @@ public class AccountService {
 
     public Account getAccount(Account account){
         return accountRepository.getAccount(account);
+    }
+
+
+    public boolean updateToken(Account account) {
+        return accountRepository.updateToken(account);
     }  
+
+    public Account getAccountByToken(Account account){
+        return accountRepository.getAccountByToken(account);
+    }
 }

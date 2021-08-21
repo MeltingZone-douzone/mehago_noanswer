@@ -12,6 +12,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+<<<<<<< HEAD
 // 컨트롤러 메서드에서 특정 조건에 맞는 파라미터가 있을 때 원하는 값을 바인딩해주는 인터페이스
 public class AuthUserHandlerMethodArgumentResolver  implements HandlerMethodArgumentResolver{
 	/**
@@ -19,6 +20,10 @@ public class AuthUserHandlerMethodArgumentResolver  implements HandlerMethodArgu
 	 * @PathVariable 어노테이션을 사용해 Request 의 Path Parameter 값을 받아올 때 이 
 	 * HandlerMethodArgumentResolver를 사용해서 값을 받아옴
 	 */
+=======
+public class AuthUserHandlerMethodArgumentResolver  implements HandlerMethodArgumentResolver{
+
+>>>>>>> origin/sewon
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
@@ -26,10 +31,17 @@ public class AuthUserHandlerMethodArgumentResolver  implements HandlerMethodArgu
 		System.out.println("AuthUserHandlerMethodArgumentResolver called");
 		
 		if(supportsParameter(parameter) == false) { // 지원안하는 파라미터이면
+<<<<<<< HEAD
 			return WebArgumentResolver.UNRESOLVED;	// 사용자 요청이 Controller에 도달하기 전에 그 요청의 파라미터들을 수정할 수 있도록 해줌
 		}
 		
 		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();  //  통해 클라이언트 요청이 담긴 파라미터를 컨트롤러보다 먼저 받아서 작업을 수행할 수 있다.
+=======
+			return WebArgumentResolver.UNRESOLVED;	// 어떤결과?
+		}
+		
+		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
+>>>>>>> origin/sewon
 		HttpSession session = request.getSession();
 		if(session == null) {
 			return null;
@@ -55,4 +67,8 @@ public class AuthUserHandlerMethodArgumentResolver  implements HandlerMethodArgu
 	}
 
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/sewon

@@ -8,7 +8,11 @@ import javax.annotation.PostConstruct;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.douzone.mehago.exceptions.InvalidJwtException;
 import com.douzone.mehago.vo.Account;
 
 import org.slf4j.Logger;
@@ -37,7 +41,7 @@ public class JwtDecoder {
         String userNickname = decodedJWT.getClaim("userNickname").asString();
 
         Account account = new Account();
-        account.setNo(userNo);
+        account.setNo(userNo); 
         account.setNickname(userNickname);
         return account;
     }
@@ -50,9 +54,20 @@ public class JwtDecoder {
 
             jwt = verifier.verify(token);
 
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
+        } catch (TokenExpiredException e) {
+            // TODO: Exception
+            System.out.println(e);
+            throw new InvalidJwtException("토큰 유효 기간이 만료 되었습니다.");
+
+        } catch (JWTDecodeException e) {
+            // TODO: Exception
+            //If the token has an invalid syntax or the header or payload are not JSONs, a JWTDecodeException will raise.
+            e.printStackTrace();
+        } catch (JWTVerificationException e) {
+            // TODO: Exception
+            //If the token has an invalid signature or the Claim requirement is not met, a JWTVerificationException will raise.
+            e.printStackTrace();
+        } 
 
         return Optional.ofNullable(jwt);
     }

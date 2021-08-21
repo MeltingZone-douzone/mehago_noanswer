@@ -18,6 +18,10 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+<<<<<<< HEAD
+=======
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+>>>>>>> origin/sewon
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.douzone.mehago.security.AuthInterceptor;
@@ -25,16 +29,24 @@ import com.douzone.mehago.security.AuthUserHandlerMethodArgumentResolver;
 import com.douzone.mehago.security.LoginInterceptor;
 import com.douzone.mehago.security.LogoutInterceptor;
 
+<<<<<<< HEAD
 @SpringBootConfiguration  // 설정파일을 만들기 위한 애노테이션 or Bean을 등록하기 위한 애노테이션
 @PropertySource("classpath:/com/douzone/mehago/config/WebConfig.properties") // 어노테이션 common.properties의 위치를 넣어주면, Enviroment객체에 프로퍼티 값이 자동으로 주입된다.
+=======
+@SpringBootConfiguration
+@PropertySource("classpath:/com/douzone/mehago/config/WebConfig.properties")
+>>>>>>> origin/sewon
 public class WebConfig implements WebMvcConfigurer {
 
 	@Autowired
 	private Environment env;
 	
 	// Argument Resolver
+<<<<<<< HEAD
 	
 	// CustomHandlerMethodArgumentResolver를 스프링에 등록
+=======
+>>>>>>> origin/sewon
 	@Bean
 	public HandlerMethodArgumentResolver handlerMethodArgumentResolver() {
 		return new AuthUserHandlerMethodArgumentResolver();

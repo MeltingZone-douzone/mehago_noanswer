@@ -4,6 +4,9 @@ import Button from "@material-ui/core/Button";
 import styles from "../assets/sass/account/LoginForm.scss";
 import localStoryge from 'local-storage';
 import axios from "axios";
+import localStorage from "local-storage";
+
+import NonMembers from "../components/NonMember";
 
 export default function LoginForm() {
   const [memberVo, setMemberVo] = useState({ email: "", password: "" });
@@ -20,17 +23,20 @@ export default function LoginForm() {
           },
         })
         .then((res) => {
-          console.log(res.statusText === "OK");
-          console.log(res.data);
-          console.log(res.data === "cant find Account");
+          console.log(res);
           if (res.statusText === "OK") {
             if (res.data === "cant find Account") {
               // 틀렸을 경우에
               setLoginFail(true);
               setMemberVo({ ...memberVo, password: "" });
+<<<<<<< HEAD
               
               localStoryge.set("token",res.data);
+=======
+              return;
+>>>>>>> origin/sewon
             } // 성공하면 메인화면 가기
+            localStorage.set("token", res.data);
           }
         });
     } catch (err) {
@@ -51,6 +57,7 @@ export default function LoginForm() {
           <span>로그인을 통해 mehago를 이용해 보세요.</span>
         </div>
       </div>
+
       <form onSubmit={login}>
         <div className={styles.Id}>
           <TextField
@@ -62,7 +69,7 @@ export default function LoginForm() {
             size="medium"
             autoComplete="off"
             name="email"
-            value={memberVo.id}
+            value={memberVo.email}
             onChange={(e) => handleChange(e)}
           />
         </div>
@@ -98,6 +105,7 @@ export default function LoginForm() {
           </Button>
         </div>
       </form>
+      <NonMembers />
     </div>
   );
 }
