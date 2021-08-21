@@ -42,8 +42,8 @@ public class AccountService {
     }
 
 
-    public boolean addToken(Account account) {
-        return accountRepository.addToken(account);
+    public boolean updateToken(Account account) {
+        return accountRepository.updateToken(account);
     }  
 
     public Account getAccountByToken(Account account){

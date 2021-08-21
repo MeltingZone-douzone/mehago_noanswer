@@ -70,7 +70,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 				String token = jwtTokenUtil.generateAccessToken(result);
 				account.setToken(token);
 
-				accountService.addToken(account);
+				accountService.updateToken(account);
  				response.getWriter().write(token);
 				return false;
 			}

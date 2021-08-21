@@ -51,14 +51,14 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			}
 			
 //			 6. @Auth가 붙어있기 때문에 인증(Authenfication) 여부 확인
-			String token = request.getHeader("Authorization");
-			System.out.println(token.split("Bearer ")[1]);
-			if(token == "null"){
+			
+			if(request.getHeader("Authorization") == null ){
 				response.getWriter().write("cant find Account");   
 				return false;   
 			}
-			
+
 //			token이 존재
+			String token = request.getHeader("Authorization");
 			Account decodeAccount = jwtDecoder.decodeJwt(token.split("Bearer ")[1]);
 			System.out.println(decodeAccount.toString());
 			Account account = accountService.getAccountByToken(decodeAccount);

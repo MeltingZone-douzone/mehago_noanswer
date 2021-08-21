@@ -31,7 +31,6 @@ export default function LoginForm() {
               return;
             } // 성공하면 메인화면 가기
             localStorage.set("token", res.data);
-            return <redirect to="/account" />; //이동 안댐;
           }
         });
     } catch (err) {
@@ -52,21 +51,6 @@ export default function LoginForm() {
           <span>로그인을 통해 mehago를 이용해 보세요.</span>
         </div>
       </div>
-      <button
-        onClick={() =>
-          axios
-            .get("/api/account/test", {
-              headers: {
-                Authorization: `Bearer ${localStorage.get("token")}`,
-              },
-            })
-            .then((res) => {
-              console.log(res.data);
-            })
-        }
-      >
-        auth test 하는중
-      </button>
       <form onSubmit={login}>
         <div className={styles.Id}>
           <TextField

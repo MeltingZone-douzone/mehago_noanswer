@@ -56,11 +56,11 @@
 		   ]]>
 	</select>
 
-	<update id="addToken" parameterType="account">
+	<update id="updateToken" parameterType="account">
 		<![CDATA[
 				update account 
 				set token= #{token}
-				where email = #{email}
+				where no = #{no}
 		  ]]>
 	</update>
 

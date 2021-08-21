@@ -58,3 +58,39 @@ jwt library
 
 milliseconds
 signWith(알고리즘, 비밀키)
+
+### React에서 사용하기(header 처리)
+
+1. Getmapping
+
+```javascript
+axios
+  .get("/api/account/test", {
+    headers: {
+      Authorization: `Bearer ${localStorage.get("token")}`,
+    },
+  })
+  .then((res) => {
+    console.log(res.data);
+  });
+```
+
+2. PostMapping
+
+```javascript
+<button
+  onClick={() => {
+    axios
+      .post("/api/account/test", null, {
+        headers: {
+          Authorization: `Bearer ${localStorage.get("token")}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+  }}
+>
+  auth post test 하는중
+</button>
+```

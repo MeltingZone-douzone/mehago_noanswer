@@ -38,10 +38,17 @@ public class AccountController {
     private AccountService accountService;
     
 @Auth
-@GetMapping("/test")
+@PostMapping("/test")
 public ResponseEntity<?> test(){
     return ResponseEntity.ok().build();
 }
+
+@Auth
+@GetMapping("/test")
+public ResponseEntity<?> test2(){
+    return ResponseEntity.ok().build();
+}
+
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@RequestBody Account account) {
         // accountService.signUp(account);

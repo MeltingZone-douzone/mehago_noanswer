@@ -35,8 +35,8 @@ public class AccountRepository {
         return sqlSession.selectOne("account.findByEmailAndPassword",account);
     }
 
-    public boolean addToken(Account account) {
-        return sqlSession.update("account.addToken", account) == 1 ? true : false;
+    public boolean updateToken(Account account) {
+        return sqlSession.update("account.updateToken", account) == 1 ? true : false;
     }
 
     public Account getAccountByToken(Account account) {

@@ -17,7 +17,7 @@ public class Account {
     @Override
 	public String toString() {
 		return "Account [no=" + no + ", email=" + email + ", password=" + password + ", nickname=" + nickname
-				+ ", name=" + name + ", phoneNumber=" + phoneNumber + ", thumbnailUrl=" + thumbnailUrl + "]";
+				+ ", name=" + name + ", phoneNumber=" + phoneNumber + ", thumbnailUrl=" + thumbnailUrl + ", token="+token+"]";
 	}
 	public Long getNo() {
 		return no;
