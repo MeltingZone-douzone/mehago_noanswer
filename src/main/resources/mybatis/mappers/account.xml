@@ -10,7 +10,7 @@
 			SELECT 
 				no, name
 			FROM 
-				user 
+				account 
 			WHERE email = #{email} AND password = #{password}
 		]]>
 	</select>
@@ -19,7 +19,7 @@
 		<![CDATA[
 			insert 
 				into account 
-				values(null,#{email},#{password},#{nickname},#{phoneNumber},#{name},#{thumbnailUrl}, now());
+				values(null, #{email}, #{password}, #{nickname}, #{phoneNumber}, #{name}, null, now());
 		]]>
 	</insert>
 
@@ -34,14 +34,14 @@
 		]]>
 	</select>
 
-	<select id="isExistNickName" parameterType="string" resultType="String">
+	<select id="isExistNickname" parameterType="string" resultType="String">
 		<![CDATA[
 			select 
-				nickName
+				nickname
 			from 
 				account
 			where 
-				nickName = #{nickName}
+				nickname = #{nickname}
 		]]>
 	</select>
 

@@ -28,9 +28,9 @@ public class AccountService {
                 System.out.println("email result는 "+ result);
             break;
 
-            case "nickName":
-                result = accountRepository.isExistNickName(value);
-                System.out.println("nickName result는 "+ result);
+            case "nickname":
+                result = accountRepository.isExistNickname(value);
+                System.out.println("nickname result는 "+ result);
             break;
 
             case "phoneNumber":

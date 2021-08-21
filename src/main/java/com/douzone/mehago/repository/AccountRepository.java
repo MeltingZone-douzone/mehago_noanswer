@@ -32,8 +32,8 @@ public class AccountRepository {
     }
 
 
-    public String isExistNickName(String nickName) {
-        return sqlSession.selectOne("account.isExistNickName", nickName);
+    public String isExistNickname(String nickname) {
+        return sqlSession.selectOne("account.isExistNickname", nickname);
     }
 
 

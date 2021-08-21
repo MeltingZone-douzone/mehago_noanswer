@@ -33,7 +33,11 @@ spring:
 ---
 # dev profile - spring boot configuration 
 spring:
-   profiles: dev
+   config:
+      activate:
+         on-profile: dev
+   jwt:
+      secret: PeAChHOng
    devtools:
       livereload:
          enabled: true
