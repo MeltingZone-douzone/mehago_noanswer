@@ -55,4 +55,21 @@
 		   and password = #{password } 
 		   ]]>
 	</select>
+
+	<update id="addToken" parameterType="account">
+		<![CDATA[
+				update account 
+				set token= #{token}
+				where email = #{email}
+		  ]]>
+	</update>
+
+	<select id="findByNo" parameterType="account"
+		resultType="account">
+		<![CDATA[
+		select no, email, nickname, phone_number, thumbnail_url
+		  from account 
+		 where no = #{no } 
+		   ]]>
+	</select>
 </mapper>

@@ -41,7 +41,7 @@ public class JwtDecoder {
         String userNickname = decodedJWT.getClaim("userNickname").asString();
 
         Account account = new Account();
-        account.setNo(userNo);
+        account.setNo(userNo); 
         account.setNickname(userNickname);
         return account;
     }

@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import javax.crypto.spec.SecretKeySpec;
 
 import com.douzone.mehago.dto.CommonResponse;
+import com.douzone.mehago.security.Auth;
 import com.douzone.mehago.service.AccountService;
 import com.douzone.mehago.utils.AES;
 import com.douzone.mehago.utils.JwtDecoder;
@@ -12,12 +13,14 @@ import com.douzone.mehago.utils.JwtTokenUtil;
 import com.douzone.mehago.vo.Account;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Encryption;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,21 +30,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountController {
     
-    private final JwtTokenUtil jwtTokenUtil;
-    private final JwtDecoder jwtDecoder;
-    private final AccountService accountService;
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private JwtDecoder jwtDecoder;
+    @Autowired
+    private AccountService accountService;
     
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Account account){  
-        Account result = accountService.getAccount(account);  
-        if(result == null){
-            return ResponseEntity.ok().body("cant find Account");         
-        }
-        String token = jwtTokenUtil.generateAccessToken(result);
-        return ResponseEntity.ok().body(token);
-            
-    }
-
+@Auth
+@GetMapping("/test")
+public ResponseEntity<?> test(){
+    return ResponseEntity.ok().build();
+}
     @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@RequestBody Account account) {
         // accountService.signUp(account);

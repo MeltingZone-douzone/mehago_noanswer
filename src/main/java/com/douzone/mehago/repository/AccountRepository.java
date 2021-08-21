@@ -3,6 +3,7 @@ package com.douzone.mehago.repository;
 import com.douzone.mehago.vo.Account;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import lombok.RequiredArgsConstructor;
@@ -11,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountRepository {
  
-    
-    private final SqlSession sqlSession;
+    @Autowired
+    private SqlSession sqlSession;
 
     public boolean updateNickname(Account account) {
         return sqlSession.update("account.updateNickname", account.getNickname()) == 1 ? true : false;
@@ -32,6 +33,14 @@ public class AccountRepository {
     }
     public Account getAccount(Account account) {
         return sqlSession.selectOne("account.findByEmailAndPassword",account);
+    }
+
+    public boolean addToken(Account account) {
+        return sqlSession.update("account.addToken", account) == 1 ? true : false;
+    }
+
+    public Account getAccountByToken(Account account) {
+        return sqlSession.selectOne("account.findByNo",account);
     }
 
 }
