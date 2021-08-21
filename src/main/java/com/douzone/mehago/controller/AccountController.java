@@ -3,9 +3,12 @@ package com.douzone.mehago.controller;
 import com.douzone.mehago.security.Auth;
 import com.douzone.mehago.service.AccountService;
 import com.douzone.mehago.service.MailService;
-import com.douzone.mehago.util.RandomPassword;
 import com.douzone.mehago.vo.Account;
 import com.douzone.mehago.vo.Mail;
+import com.douzone.mehago.utils.AES;
+import com.douzone.mehago.utils.JwtDecoder;
+import com.douzone.mehago.utils.JwtTokenUtil;
+import com.douzone.mehago.utils.RandomPassword;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,16 +25,15 @@ import org.apache.tomcat.util.net.openssl.ciphers.Encryption;
 
 import lombok.RequiredArgsConstructor;
 
-
+@RequiredArgsConstructor
 @RequestMapping("/api/account")
 @Controller
 public class AccountController {
     
-    @Autowired
-    private AccountService accountService;
-    @Autowired
-    private MailService mailService;
-
+    private final MailService mailService;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final JwtDecoder jwtDecoder;
+    private final AccountService accountService;
 
     @Auth
     @GetMapping("/test")
@@ -40,26 +42,41 @@ public class AccountController {
         return "hi";
     }
 
-    @PostMapping("/signup")
+    @RequestMapping("/login")
+    public ResponseEntity<?> login(){
+        System.out.println("login");
+        return ResponseEntity.ok().build();
+    }
+    
+    @PostMapping("/sign-up")
     public ResponseEntity<?> signUp(@RequestBody Account account) {
-        System.out.println("아아 여기는 부트");
-        System.out.println(account);
-        accountService.signUp(account);
+        // accountService.signUp(account);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/signup/valid-{name}")
-    public ResponseEntity<?> validateAccount(@PathVariable String name, @RequestBody String value) {
-        System.out.println(" name, value는 "+ name + " : " + value);
-        String data = accountService.isExist(name, value);
-        System.out.println(" name, result는 "+ name + " : " + data);
-        System.out.println(data != null ? "이미있노 그래서 email고대로감" : "오 없다 그걸로해라 null로감");
-        // return ResponseEntity.ok().build();
-        return ResponseEntity.ok().body(data != null ? data : "null");
-    }
-
-    @GetMapping("get-user")
+    // 암호화 테스트용.. localhost:9999/profile하면 볼 수 있음.
+    @GetMapping("/get-user")
     public void getUser() {
+        // String secretKey = "Peach";
+        // String originalString = "asd003786!";
+
+        // String encryptedString = AES.encrypt(originalString, secretKey);
+        // String decryptedString = AES.decrypt(encryptedString, secretKey);
+
+        // System.out.println(encryptedString);
+        // System.out.println(decryptedString);
+
+        Account account =  new Account();
+        account.setNo(2L);
+        account.setNickname("nickname");
+
+
+        String token = jwtTokenUtil.generateAccessToken(account);
+        System.out.println(token);
+
+        Account validAccount = jwtDecoder.decodeJwt(token);
+
+        System.out.println(validAccount.toString());
     }
     
 
@@ -98,34 +115,47 @@ public class AccountController {
     @PostMapping("/findByNameAndEmail")
     public ResponseEntity<?> findByNameAndEmail(@RequestBody Account account, Mail mailDto){
         Account accountVo = null;
-        String name = account.getName();
-        String email = account.getEmail();
-        accountVo = accountService.searchAccount(name, email);
-        System.out.println(accountVo);
+        try {
+            String name = account.getName();
+            String email = account.getEmail();
+            accountVo = accountService.searchAccount(name, email);
+            if(accountVo == null){
+                return ResponseEntity.ok().body("cant find Account");         
+            }
+            if(accountVo.getEmail() != null){
+                System.out.println("이메일 있음 보낼꺼임");
+                String rendomPassword = RandomPassword.getRamdomPassword(10);
+                accountService.changeRandomPassword(rendomPassword, email);
 
-        if(accountVo.getEmail() != null){
-            System.out.println("이메일 있음 보낼꺼임");
-            String rendomPassword = RandomPassword.getRamdomPassword(10);
-            accountService.changeRandomPassword(rendomPassword, email);
-
-            mailDto.setTitle("MEHAGO 임시 비밀번호입니다.");
-            mailDto.setMessage("요청하신 임시 비밀번호는 다음과 같습니다." + rendomPassword);
-            mailDto.setAddress("mehagochat@gmail.com");
-            System.out.println(mailDto.getAddress() + " in controller");
-            mailService.mailSend(mailDto);
-        } 
-        return ResponseEntity.ok().body(accountVo != null);
+                mailDto.setTitle("MEHAGO 임시 비밀번호입니다.");
+                mailDto.setMessage("요청하신 임시 비밀번호는 다음과 같습니다." + rendomPassword);
+                mailDto.setAddress("mehagochat@gmail.com");
+                System.out.println(mailDto.getAddress() + " in controller");
+                mailService.mailSend(mailDto);
+            } 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return ResponseEntity.ok().body(accountVo);
     }
 
     @PostMapping("/searchEmail")
     public ResponseEntity<?> searchEmail(@RequestBody Account account){
         Account accountVo = null;
-        String name = account.getName();
-        String phoneNumber = account.getPhoneNumber();
-        accountVo = accountService.searchEmail(name, phoneNumber);                
-        System.out.println(accountVo);
-        System.out.println(accountVo.getEmail());
-        return ResponseEntity.ok().body(accountVo != null ? accountVo.getEmail(): "No Search Email");
+        try {
+            String name = account.getName();
+            String phoneNumber = account.getPhoneNumber();
+            accountVo = accountService.searchEmail(name, phoneNumber);                
+            System.out.println(accountVo);
+            if(accountVo == null){
+                return ResponseEntity.ok().body("cant find Account");         
+            }
+                
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return ResponseEntity.ok().body(accountVo.getEmail());
     }
 
     // @RequestBody 

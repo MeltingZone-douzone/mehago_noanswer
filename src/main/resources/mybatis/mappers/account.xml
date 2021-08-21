@@ -10,7 +10,7 @@
 			SELECT 
 				no, name
 			FROM 
-				user 
+				account 
 			WHERE email = #{email} AND password = #{password}
 		]]>
 	</select>

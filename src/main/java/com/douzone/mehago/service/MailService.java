@@ -1,8 +1,8 @@
 package com.douzone.mehago.service;
 
 
+import com.douzone.mehago.utils.MailHandler;
 import com.douzone.mehago.vo.Mail;
-import com.douzone.mehago.util.MailHandler;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;

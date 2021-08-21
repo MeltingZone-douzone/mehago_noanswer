@@ -1,4 +1,4 @@
-package com.douzone.mehago.util;
+package com.douzone.mehago.utils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;

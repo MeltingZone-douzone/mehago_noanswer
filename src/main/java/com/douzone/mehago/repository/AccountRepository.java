@@ -16,15 +16,15 @@ public class AccountRepository {
     private SqlSession sqlSession;
     
     public Account findByEmailAndPassword(String email, String password) {
-        Map<String, Object> map = new HashMap();
-		map.put("email", email);
-		map.put("password", password);
+      Map<String, Object> map = new HashMap();
+		  map.put("email", email);
+		  map.put("password", password);
 		return sqlSession.selectOne("account.findByEmailAndPassword", map);
     }
 
     public Boolean insert(Account vo) {
-		int result = sqlSession.insert("account.insert", vo);
-		return result == 1;
+		  int result = sqlSession.insert("account.insert", vo);
+		  return result == 1;
 	  }
 
 

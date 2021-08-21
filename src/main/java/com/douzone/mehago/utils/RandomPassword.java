@@ -1,4 +1,4 @@
-package com.douzone.mehago.util;
+package com.douzone.mehago.utils;
 
 public class RandomPassword {
     public static String getRamdomPassword(int len) { 

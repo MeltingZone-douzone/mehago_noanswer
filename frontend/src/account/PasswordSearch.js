@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import styles from "../assets/sass/account/LoginForm.scss";
@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export default function PasswordSearch(){
     const [accounts, setAccount] = useState({name:"", email:""});
-    const [sendMassege, setSendMassege] = useState("");
+    const [sendMassege, setSendMassege] = useState(true);
 
     const onChangeUserInput = (e)=>{
         const {name, value } = e.target;
@@ -27,14 +27,14 @@ export default function PasswordSearch(){
             }
 
             axios.post(url, account , {headers:{'Context-Type': 'application/json'}})
-                .then(res => {
-                    if(res.data.data == true){
-                        setSendMassege(true);
-                    } else {
-                        setSendMassege(false);
-                    }
-            });
-            setAccount({name: "", email:""});
+            // .then(res => {console.log(res.data);
+            //     if(res.data = "cant find Account"){
+            //         setSendMassege(false);
+            //     } else {
+            //         setSendMassege(ture);
+            //     }
+            // });
+            // setAccount({name: "", email:""});
 
             
         } catch (e) {
@@ -76,15 +76,13 @@ export default function PasswordSearch(){
                         value={accounts.email} 
                         onChange={(e) => {onChangeUserInput(e)}}/>
                 </div>
-                {sendMassege === false ? (
+                 
+                 {sendMassege == false}{( 
                     <div className={styles.LoginFail} name="loginFail">
                         <span>가입되지 않은 이름거나, 잘못된 이메일 입니다.</span>
                     </div>
-                    ) : (
-                    <div className={styles.LoginFail} name="loginFail">
-                        <span>입력하신 이메일로 임시 비밀번호가 전송되었습니다.</span>
-                    </div>
-                )}
+                    
+                 )}
                 <div className={styles.LoginButton}>
                     <Button
                         className={styles.LoginBtn}

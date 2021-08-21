@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import styles from "../assets/sass/account/LoginForm.scss";
+import localStoryge from 'local-storage';
 import axios from "axios";
 
 export default function LoginForm() {
@@ -27,6 +28,8 @@ export default function LoginForm() {
               // 틀렸을 경우에
               setLoginFail(true);
               setMemberVo({ ...memberVo, password: "" });
+              
+              localStoryge.set("token",res.data);
             } // 성공하면 메인화면 가기
           }
         });

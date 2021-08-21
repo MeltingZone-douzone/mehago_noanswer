@@ -33,7 +33,11 @@ spring:
 ---
 # dev profile - spring boot configuration 
 spring:
-   profiles: dev
+   config:
+      activate:
+         on-profile: dev
+   jwt:
+      secret: PeAChHOng
    devtools:
       livereload:
          enabled: true
@@ -42,12 +46,10 @@ spring:
       url: jdbc:mysql://127.0.0.1:3306/chat?characterEncoding=utf8
       username: bookmall_local
       password: bookmall_local
-      initialSize: 10
-      maxActive: 100
+      
 ---
 # production profile - spring boot configuration
 spring:
-   profiles: production
    datasource:
       driver-class-name: org.mariadb.jdbc.Driver
       url: jdbc:mysql://127.0.0.1:3306/chat?characterEncoding=utf8&allowPublicKeyRetrieval=true
@@ -57,7 +59,6 @@ spring:
 # server
 server:
    port: 8080
-   servlet:
 
 ---
 #mybatis

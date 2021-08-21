@@ -3,10 +3,14 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import styles from "../assets/sass/account/LoginForm.scss";
 import axios from 'axios';
+import Modal from "react-modal";
+import ReactModal from "react-modal";
+ReactModal.setAppElement('body'); 
 
 export default function IdSearch(){
     const [accounts, setAccount] = useState({name:"", phoneNumber:""});
     const [searchEmail, setSearchEmail] = useState(true);
+    const [modal01IsOpen, setModal01IsOpen] = useState(false);
 
     const onChangeUserInput = (e)=>{
         const {name, value } = e.target;
@@ -28,13 +32,13 @@ export default function IdSearch(){
 
             axios.post(url, account , {headers:{'Context-Type': 'application/json'}})
                 .then(res => {
-                    console.log(res);
-                    if(res.data.data == "No Search Email"){
-                        console.log("No Search Email");
+                    console.log(res.data);
+                    if(res.data == "cant find Account"){
                         setSearchEmail(false);
                     } else {
                         console.log("success");
-                        setSearchEmail(res.data.data);
+                        setSearchEmail(res.data);
+                        setModal01IsOpen(true);
                     }
             });
             setAccount({name: "", phoneNumber:""});
@@ -47,9 +51,9 @@ export default function IdSearch(){
     return (
         <div className={styles.LoginForm}>
             <div className={styles.Message}>
-                <h1>아이디 찾기</h1>
+                <h1>이메일을 잊으셨나요?</h1>
                 <div className={styles.MessageInfo}>
-                <span>.......</span>
+                <span>로그인을 통해 mehago를 이용해 보세요.</span>
                 </div>
             </div>
             <form >
@@ -80,11 +84,11 @@ export default function IdSearch(){
                         onChange={(e)=>{onChangeUserInput(e)}}/>
                 </div>
                 {searchEmail === false ? (
-                    <div className={styles.LoginFail} name="loginFail">
+                    <div className={styles.LoginFail} >
                         <span>가입되지 않은 이름거나, 잘못된 전화번호입니다.</span>
                     </div>
                     ) : (
-                    <div className={styles.LoginFail} name="loginFail">
+                    <div className={styles.shearchEmail} >
                         <span>{searchEmail}</span>
                     </div>
                 )}
@@ -97,6 +101,24 @@ export default function IdSearch(){
                         onClick={emailReceive}>
                         찾기
                     </Button>
+                    <Modal
+                        isOpen={modal01IsOpen}
+                        onRequestClose={ () => setModal01IsOpen(false) }
+                        shouldCloseOnOverlayClick={ true }
+                        className={ styles.form }
+                        overlayClassName={ styles.LoginForm }
+                        style={ {content: {width: 350}} }
+                        contentLabel="modal05 example">
+                        <h1>아이디</h1>
+                        <div>
+                            하하하하하하하~
+                        </div>
+                        <div className={ styles['modal-dialog-buttons'] }>
+                            <button>확인</button>
+                            <button onClick={ () => setModal01IsOpen(false) }>취소</button>
+                        </div>
+                    </Modal>
+
                 </div>
             </form>  
         </div>

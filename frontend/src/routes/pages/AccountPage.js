@@ -1,5 +1,6 @@
-import React from "react";
-import { Switch, Route, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Redirect, Route } from 'react-router-dom';
+import { Switch, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 import Links from "../../components/Links";
