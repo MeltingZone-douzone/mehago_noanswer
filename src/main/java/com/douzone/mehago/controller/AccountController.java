@@ -125,18 +125,14 @@ public class AccountController {
             String email = account.getEmail();
             accountVo = accountService.searchAccount(name, email);
             if(accountVo == null){
-                return ResponseEntity.ok().body("cant find Account");         
+                return ResponseEntity.ok().body("false");         
             }
             if(accountVo.getEmail() != null){
                 System.out.println("이메일 있음 보낼꺼임");
-                String rendomPassword = RandomPassword.getRamdomPassword(10);
-                accountService.changeRandomPassword(rendomPassword, email);
 
-                mailDto.setTitle("MEHAGO 임시 비밀번호입니다.");
-                mailDto.setMessage("요청하신 임시 비밀번호는 다음과 같습니다." + rendomPassword);
-                mailDto.setAddress("mehagochat@gmail.com");
-                System.out.println(mailDto.getAddress() + " in controller");
-                mailService.mailSend(mailDto);
+                String rendomPassword = RandomPassword.getRamdomPassword(10);
+                mailService.mailSend(rendomPassword, accountVo.getEmail(), name);
+                accountService.changeRandomPassword(rendomPassword, email);
             } 
         } catch (Exception e) {
             System.out.println(e);

@@ -15,20 +15,24 @@ public class MailService {
     private JavaMailSender mailSender;
     // private static final String FROM_ADDRESS = "mehagoChat@gmail.com";
 
-    public void mailSend(Mail mailDto) {
+    public void mailSend(String rendomPassword, String email, String name) {
+        Mail mailDto = new Mail(); 
         try {
+            
+            mailDto.setAddress("mehagochat@gmail.com");     // email로 변경 해야함
+
             MailHandler mailHandler = new MailHandler(mailSender);
             // 받는 사람
-           mailHandler.setTo(mailDto.getAddress());
+            mailHandler.setTo(mailDto.getAddress());
 
-           System.out.println(mailDto.getAddress());
             // 보내는 사람
-        //    mailHandler.setFrom(MailService.FROM_ADDRESS);
+            // mailHandler.setFrom(MailService.FROM_ADDRESS);
+            
             // 제목
-           mailHandler.setSubject(mailDto.getTitle());
+            mailHandler.setSubject();
             // HTML Layout
-            String htmlContent = "<p>" + mailDto.getMessage() +"<p>";
-            mailHandler.setText(htmlContent, true);
+            
+            mailHandler.setText(name, rendomPassword, true);
 
             mailHandler.send();
             System.out.println("send");

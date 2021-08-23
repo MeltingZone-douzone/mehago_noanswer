@@ -108,7 +108,6 @@
 	<select id="searchAccount" parameterType="map"
 		resultType="account">
 		<![CDATA[
-<<<<<<< HEAD
 			select email, password
 				from account 
 				where name = #{name} 
@@ -134,13 +133,6 @@
 		]]>
 	</update>
 
-=======
-		select no, email, nickname
-		  from account 
-		 where email = #{email } 
-		   and password = #{password } 
-		   ]]>
-	</select>
 
 	<update id="updateToken" parameterType="account">
 		<![CDATA[
@@ -158,5 +150,5 @@
 		 where no = #{no } 
 		   ]]>
 	</select>
->>>>>>> origin/sewon
+
 </mapper>

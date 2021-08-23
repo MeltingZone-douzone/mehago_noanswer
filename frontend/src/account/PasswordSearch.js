@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function PasswordSearch(){
     const [accounts, setAccount] = useState({name:"", email:""});
-    const [sendMassege, setSendMassege] = useState(true);
+    const [sendMassege, setSendMassege] = useState("");
 
     const onChangeUserInput = (e)=>{
         const {name, value } = e.target;
@@ -25,22 +25,23 @@ export default function PasswordSearch(){
                 name : accounts.name,
                 email : accounts.email
             }
-
+            setSendMassege(true);
             axios.post(url, account , {headers:{'Context-Type': 'application/json'}})
-            // .then(res => {console.log(res.data);
-            //     if(res.data = "cant find Account"){
-            //         setSendMassege(false);
-            //     } else {
-            //         setSendMassege(ture);
-            //     }
-            // });
-            // setAccount({name: "", email:""});
+            .then(res => {console.log(res.data);
+                if(res.data == false){
+                    setSendMassege(false);
+                } else {
+                    setSendMassege(true);
+                }
+            });
+            setAccount({name: "", email:""});
 
             
         } catch (e) {
             console.log(e);
         }
     }
+
     return (
         <div className={styles.LoginForm}>
             <div className={styles.Message}>
@@ -77,11 +78,15 @@ export default function PasswordSearch(){
                         onChange={(e) => {onChangeUserInput(e)}}/>
                 </div>
                  
-                 {sendMassege == false}{( 
+                 {sendMassege === false ? ( 
                     <div className={styles.LoginFail} name="loginFail">
                         <span>가입되지 않은 이름거나, 잘못된 이메일 입니다.</span>
                     </div>
                     
+                 ) : (
+                    <div className={styles.emailsend} name="loginFail">
+                        <span>{sendMassege === true ? "요청하신 이메일로 비밀번호를 전송 하였습니다." : ''}</span>
+                    </div>
                  )}
                 <div className={styles.LoginButton}>
                     <Button

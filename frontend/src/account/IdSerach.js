@@ -3,14 +3,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import styles from "../assets/sass/account/LoginForm.scss";
 import axios from 'axios';
-import Modal from "react-modal";
-import ReactModal from "react-modal";
-ReactModal.setAppElement('body'); 
 
 export default function IdSearch(){
     const [accounts, setAccount] = useState({name:"", phoneNumber:""});
-    const [searchEmail, setSearchEmail] = useState(true);
-    const [modal01IsOpen, setModal01IsOpen] = useState(false);
+    const [searchEmail, setSearchEmail] = useState("");
 
     const onChangeUserInput = (e)=>{
         const {name, value } = e.target;
@@ -38,7 +34,6 @@ export default function IdSearch(){
                     } else {
                         console.log("success");
                         setSearchEmail(res.data);
-                        setModal01IsOpen(true);
                     }
             });
             setAccount({name: "", phoneNumber:""});
@@ -84,12 +79,12 @@ export default function IdSearch(){
                         onChange={(e)=>{onChangeUserInput(e)}}/>
                 </div>
                 {searchEmail === false ? (
-                    <div className={styles.LoginFail} >
+                    <div className={styles.LoginFail} name="Validity" val>
                         <span>가입되지 않은 이름거나, 잘못된 전화번호입니다.</span>
                     </div>
                     ) : (
-                    <div className={styles.shearchEmail} >
-                        <span>{searchEmail}</span>
+                    <div className={styles.LoginFail} >
+                        <span>{searchEmail === '' ? '' : `요청하신 이메일은 ${searchEmail} 입니다`}</span>
                     </div>
                 )}
                 <div className={styles.LoginButton}>
@@ -101,24 +96,6 @@ export default function IdSearch(){
                         onClick={emailReceive}>
                         찾기
                     </Button>
-                    <Modal
-                        isOpen={modal01IsOpen}
-                        onRequestClose={ () => setModal01IsOpen(false) }
-                        shouldCloseOnOverlayClick={ true }
-                        className={ styles.form }
-                        overlayClassName={ styles.LoginForm }
-                        style={ {content: {width: 350}} }
-                        contentLabel="modal05 example">
-                        <h1>아이디</h1>
-                        <div>
-                            하하하하하하하~
-                        </div>
-                        <div className={ styles['modal-dialog-buttons'] }>
-                            <button>확인</button>
-                            <button onClick={ () => setModal01IsOpen(false) }>취소</button>
-                        </div>
-                    </Modal>
-
                 </div>
             </form>  
         </div>
