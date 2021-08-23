@@ -36,8 +36,6 @@ spring:
    config:
       activate:
          on-profile: dev
-   jwt:
-      secret: PeAChHOng
    devtools:
       livereload:
          enabled: true
@@ -48,6 +46,9 @@ spring:
       password: bookmall_local
       initialSize: 10
       maxActive: 100
+   jwt:
+      secret: PeAChHOng
+      issuer: Mehago
 ---
 # production profile - spring boot configuration
 spring:

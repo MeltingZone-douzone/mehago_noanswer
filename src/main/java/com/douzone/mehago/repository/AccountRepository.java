@@ -31,6 +31,7 @@ public class AccountRepository {
         Map<String, Object> map = new HashMap();
 		map.put("name", name);
 		map.put("value", value);
+        System.out.println(map);
         return sqlSession.selectOne("account.existData", map);
     }
 
@@ -52,5 +53,13 @@ public class AccountRepository {
     }
     public Account getAccount(Account account) {
         return sqlSession.selectOne("account.findByEmailAndPassword",account);
+    }
+
+    public boolean updateToken(Account account) {
+        return sqlSession.update("account.updateToken", account) == 1 ? true : false;
+    }
+
+    public Account getAccountByToken(Account account) {
+        return sqlSession.selectOne("account.findByNo", account);
     }
 }

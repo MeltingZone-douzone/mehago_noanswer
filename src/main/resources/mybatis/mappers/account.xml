@@ -24,14 +24,38 @@
 	</insert>
 
 	<select id="existData" parameterType="Map" resultType="String">
-		<![CDATA[
-			select 
-				${name}
-			from 
-				account
-			where 
-				${name} = #{value}
-		]]>
+		<choose>
+			<when test='name == "email"'>
+				<![CDATA[
+					select 
+						email
+					from 
+						account
+					where 
+						email = #{value}
+				]]>
+			</when>
+			<when test='name == "nickname"'>
+				<![CDATA[
+					select 
+						nickname
+					from 
+						account
+					where 
+						nickname = #{value}
+				]]>
+			</when>
+			<when test='name == "phone_number"'>
+				<![CDATA[
+					select 
+						phone_number
+					from 
+						account
+					where 
+						phone_number = #{value}
+				]]>
+			</when>
+		</choose>
 	</select>
 
 	<update id="update" parameterType="account">
@@ -56,6 +80,8 @@
 		</choose>
 	</update>
 
+
+<!-- $ 바꾸기 -->
 	<update id="updateNickname" parameterType="account">
 		<![CDATA[
 		    update account
@@ -81,5 +107,21 @@
 		]]>
 	</update>
 
+	<update id="updateToken" parameterType="account">
+		<![CDATA[
+				update account 
+				set token= #{token}
+				where no = #{no}
+		  ]]>
+	</update>
+
+	<select id="findByNo" parameterType="account"
+		resultType="account">
+		<![CDATA[
+		select no, email, nickname, phone_number, thumbnail_url
+		  from account 
+		 where no = #{no } 
+		   ]]>
+	</select>
 	
 </mapper>

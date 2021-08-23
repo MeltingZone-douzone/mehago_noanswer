@@ -1,5 +1,8 @@
 package com.douzone.mehago.controller;
 
+import java.util.concurrent.TimeUnit;
+
+import com.douzone.mehago.dto.CommonResponse;
 import com.douzone.mehago.security.Auth;
 import com.douzone.mehago.service.AccountService;
 import com.douzone.mehago.utils.AES;
@@ -49,33 +52,40 @@ public class AccountController {
 
     @PostMapping("/signup/valid-{name}")
     public ResponseEntity<?> validateAccount(@PathVariable String name, @RequestBody String value) {
+        System.out.println(name + " name임");
         String data = accountService.existsData(name, value);
         return ResponseEntity.ok().body(data != null ? data : "null");
     }
 
     // 암호화 테스트용.. localhost:9999/profile하면 볼 수 있음.
     @GetMapping("/get-user")
-    public void getUser() {
+    public ResponseEntity<?> getUser() {
         // String secretKey = "Peach";
         // String originalString = "asd003786!";
 
         // String encryptedString = AES.encrypt(originalString, secretKey);
         // String decryptedString = AES.decrypt(encryptedString, secretKey);
-
         // System.out.println(encryptedString);
         // System.out.println(decryptedString);
 
-        Account account =  new Account();
+        System.out.println("안녕");
+
+        Account account = new Account();
         account.setNo(2L);
         account.setNickname("nickname");
 
-
-        String token = jwtTokenUtil.generateToken(account);
+        String token = jwtTokenUtil.generateAccessToken(account);
         System.out.println(token);
 
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
         Account validAccount = jwtDecoder.decodeJwt(token);
-
         System.out.println(validAccount.toString());
+
+        return ResponseEntity.ok().body(CommonResponse.success(token));
     }
     
 
@@ -99,10 +109,5 @@ public class AccountController {
         
         return ResponseEntity.ok().build();
     }
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Account account){  
-        Account result = accountService.getAccount(account);  
-       
-        return ResponseEntity.ok().body(result == null ? "cant find Account" : result);         
-    }
+
 }

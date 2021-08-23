@@ -15,31 +15,38 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JwtTokenUtil{
+public class JwtTokenUtil {
 
     // private static final Logger log =LoggerFactory.getLogger(JwtTokenUtil.class);
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30; // 30분
 
     @Value("${spring.jwt.secret}")
     private String secretKey;
 
+    @Value("${spring.jwt.issuer}")
+    private String issuer;
+
     @PostConstruct // 주입 받은뒤 실행하는 초기화
-    protected void init(){
+    protected void init() {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    public String generateToken(Account account){
+    public String generateAccessToken(Account account){
         String token = null;    
         try {
             token = JWT.create()
+                        .withIssuer(issuer)
                         .withClaim("userNo", account.getNo())
                         .withClaim("userNickname", account.getNickname())
-                        // .withExpiresAt(expiresAt)
+                        .withExpiresAt(new Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRE_TIME))
                         .sign(generateAlgorithm());
 
+        } catch (JWTCreationException exception){
+            //Invalid Signing configuration / Couldn't convert Claims.
+            
+            // TODO: Exception
         } catch (Exception e) {
-            //TODO: handle exception
-            // log.error(e.getMessage());
-            e.getStackTrace();
+            e.printStackTrace();
         }
 
         return token;
@@ -48,4 +55,4 @@ public class JwtTokenUtil{
     private Algorithm generateAlgorithm() throws UnsupportedEncodingException{
         return Algorithm.HMAC256(secretKey);
     }
-}
+} 

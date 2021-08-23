@@ -35,4 +35,6 @@ public class Account {
     private String phoneNumber;
     private String thumbnailUrl;
     // created_at
+
+    private String token;
 }
