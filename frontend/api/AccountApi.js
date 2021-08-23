@@ -1,18 +1,38 @@
 import axios from "axios";
+import localStorage from "local-storage";
 
-export function signUpApi(user) {
-    console.log(user);
-    return axios.post("/api/account/sign-up", user,)
-                .then(res => console.log(res));
+const header = {
+    "Context-Type": "application/json",
+    "Accept": "application/json",
+}
+
+
+const headerWithAuth = {
+    "Context-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": `Bearer ` + localStorage.get("token")
+
+}
+export function signIn(account) {
+    return axios
+        .post("/api/account/login", account, {
+            headers: header
+        })
+        .then((res) => res);
+}
+export function signUp(account) {
+    console.log(account);
+    return axios.post("/api/account/sign-up", account, header)
+        .then(res => console.log(res));
 }
 
 export function getUserInfo() {
-    return axios.get("/api/account/get-user", {headers:{"Context-Type" : "application/json"}})
-                .then(res => console.log(res));
+    return axios.get("/api/account/get-user", { headers: headerWithAuth })
+        .then(res => res);
 }
 
 // 닉네임 존재여부
-export function validNickanmeExist() { 
+export function validNickanmeExist() {
     // return axios.get("/api/getUserInfo", {headers:{"Context-Type" : "application/json"});
 }
 

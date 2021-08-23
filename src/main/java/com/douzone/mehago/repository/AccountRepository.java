@@ -13,34 +13,31 @@ import lombok.RequiredArgsConstructor;
 @Repository
 @RequiredArgsConstructor
 public class AccountRepository {
- 
-    
+
     private final SqlSession sqlSession;
 
     public Account findByEmailAndPassword(String email, String password) {
         Map<String, Object> map = new HashMap();
-		map.put("email", email);
-		map.put("password", password);
-		return sqlSession.selectOne("account.findByEmailAndPassword", map);
+        map.put("email", email);
+        map.put("password", password);
+        return sqlSession.selectOne("account.findByEmailAndPassword", map);
     }
 
     public Boolean insert(Account vo) {
-		int result = sqlSession.insert("account.insert", vo);
-		return result == 1;
-	}
-
-    public String isExistEmail(String email) {
-        return sqlSession.selectOne("account.isExistEmail",email);
+        int result = sqlSession.insert("account.insert", vo);
+        return result == 1;
     }
 
+    public String isExistEmail(String email) {
+        return sqlSession.selectOne("account.isExistEmail", email);
+    }
 
     public String isExistNickName(String nickName) {
         return sqlSession.selectOne("account.isExistNickName", nickName);
     }
 
-
     public String isExistPhoneNumber(String phoneNumber) {
-        return sqlSession.selectOne("account.isExistPhoneNumber",phoneNumber);
+        return sqlSession.selectOne("account.isExistPhoneNumber", phoneNumber);
     }
 
     public boolean updateNickname(Account account) {
@@ -59,8 +56,16 @@ public class AccountRepository {
         sqlSession.insert("account.insert", account);
 
     }
+
     public Account getAccount(Account account) {
-        return sqlSession.selectOne("account.findByEmailAndPassword",account);
+        return sqlSession.selectOne("account.findByEmailAndPassword", account);
     }
 
+    public boolean updateToken(Account account) {
+        return sqlSession.update("account.updateToken", account) == 1 ? true : false;
+    }
+
+    public Account getAccountByToken(Account account) {
+        return sqlSession.selectOne("account.findByNo", account);
+    }
 }

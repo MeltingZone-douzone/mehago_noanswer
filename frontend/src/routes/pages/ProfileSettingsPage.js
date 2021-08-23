@@ -5,20 +5,19 @@ import UserSettingsContainer from '../../profile/settings/ProfileSettings';
 
 
 import { getUserInfo } from '../../../api/AccountApi';
-export default function ProfileSettingsPage({match}) {
+export default function ProfileSettingsPage({ match }) {
 
-    const [userInfo, setUserInfo] = useState({nickname:"noNickname", name:"hong", telephoneNum:"01022221234" , thumbnailUrl:"" });
+    const [userInfo, setUserInfo] = useState({ nickname: "", name: "", phoneNumber: "", thumbnailUrl: "" });
 
-    useEffect(() =>{
-        // Todo 유저 정보가져오기.
-        console.log(getUserInfo());
-    },[])
+    useEffect(() => {
+        getUserInfo().then(res => setUserInfo(res.data));
+    }, [])
 
 
-    return(
+    return (
         <Template>
             <UserProfile user={userInfo} />
-            <UserSettingsContainer user={userInfo} match={match}/>
+            {/* <UserSettingsContainer user={userInfo} match={match} /> */}
         </Template>
     );
 }

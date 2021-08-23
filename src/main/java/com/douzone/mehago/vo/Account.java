@@ -12,5 +12,6 @@ public class Account {
     private String name;
     private String phoneNumber;
     private String thumbnailUrl;
+    private String token;
 
 }

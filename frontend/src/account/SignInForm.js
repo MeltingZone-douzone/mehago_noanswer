@@ -5,32 +5,27 @@ import styles from "../assets/sass/account/LoginForm.scss";
 import axios from "axios";
 import localStorage from "local-storage";
 
+import { signIn } from '../../api/AccountApi';
 import NonMembers from "../components/NonMember";
 
-export default function LoginForm() {
+export default function SignInForm() {
   const [memberVo, setMemberVo] = useState({ email: "", password: "" });
   const [loginFail, setLoginFail] = useState(false);
 
   const login = (e) => {
     e.preventDefault();
     try {
-      axios
-        .post("/api/account/login", memberVo, {
-          headers: {
-            ContentType: "application/json",
-            Accept: "application/json",
-          },
-        })
-        .then((res) => {
-          if (res.statusText === "OK") {
-            if (res.data === "cant find Account") {
-              // 틀렸을 경우에
-              setLoginFail(true);
-              setMemberVo({ ...memberVo, password: "" });
-            } // 성공하면 메인화면 가기
-            localStorage.set("token", res.data);
-          }
-        });
+      signIn(memberVo).then((res) => {
+        if (res.statusText === "OK") {
+          if (res.data === "cant find Account") {
+            // 틀렸을 경우에
+            setLoginFail(true);
+            setMemberVo({ ...memberVo, password: "" });
+          } // 성공하면 메인화면 가기
+          localStorage.set("token", res.data);
+          // history.push('/');
+        }
+      });
     } catch (err) {
       console.error(err);
     }

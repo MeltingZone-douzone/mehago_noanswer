@@ -2,9 +2,12 @@ package com.douzone.mehago.controller;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.crypto.spec.SecretKeySpec;
 
 import com.douzone.mehago.dto.CommonResponse;
+import com.douzone.mehago.security.Auth;
+import com.douzone.mehago.security.AuthUser;
 import com.douzone.mehago.service.AccountService;
 import com.douzone.mehago.utils.AES;
 import com.douzone.mehago.utils.JwtDecoder;
@@ -22,16 +25,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 
-
 @RequestMapping("/api/account")
 @Controller
 @RequiredArgsConstructor
 public class AccountController {
-    
+
     private final JwtTokenUtil jwtTokenUtil;
     private final JwtDecoder jwtDecoder;
     private final AccountService accountService;
-    
+
+    @Auth
+    @PostMapping("/test")
+    public ResponseEntity<?> test(@AuthUser Account auth, @RequestBody Account account) {
+        System.out.println(auth.toString());
+        System.out.println(account.toString());
+        return ResponseEntity.ok().body(auth);
+    }
 
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@RequestBody Account account) {
@@ -41,85 +50,40 @@ public class AccountController {
 
     @PostMapping("/signup/valid-{name}")
     public ResponseEntity<?> validateAccount(@PathVariable String name, @RequestBody String value) {
-        System.out.println(" name, value는 "+ name + " : " + value);
+        System.out.println(" name, value는 " + name + " : " + value);
         String data = accountService.isExist(name, value);
-        System.out.println(" name, result는 "+ name + " : " + data);
+        System.out.println(" name, result는 " + name + " : " + data);
         System.out.println(data != null ? "이미있노 그래서 email고대로감" : "오 없다 그걸로해라 null로감");
         // return ResponseEntity.ok().build();
         return ResponseEntity.ok().body(data != null ? data : "null");
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<?> loginFail () {
-        System.out.println("loginFail");
-        return ResponseEntity.ok().body(CommonResponse.fail("로그인 실패"));
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Account account){  
-        System.out.println("Controller");
-
-
-        Account result = accountService.getAccount(account);  
-        if(result == null){
-            return ResponseEntity.ok().body("cant find Account");         
-        }
-        String token = jwtTokenUtil.generateAccessToken(result);
-        return ResponseEntity.ok().body(token);
-            
-    }
-
+    @Auth
     @GetMapping("/get-user")
-    public ResponseEntity<?> getUser() {
-        // String secretKey = "Peach";
-        // String originalString = "asd003786!";
-
-        // String encryptedString = AES.encrypt(originalString, secretKey);
-        // String decryptedString = AES.decrypt(encryptedString, secretKey);
-        // System.out.println(encryptedString);
-        // System.out.println(decryptedString);
-
-        System.out.println("안녕");
-
-        Account account =  new Account();
-        account.setNo(2L);
-        account.setNickname("nickname");
-
-        String token = jwtTokenUtil.generateAccessToken(account);
-        System.out.println(token);
-        
-        try{
-            TimeUnit.SECONDS.sleep(2);
-        }catch(Exception e){
-            e.getStackTrace();
-        }
-        Account validAccount = jwtDecoder.decodeJwt(token);
-        System.out.println(validAccount.toString());
-
-        return ResponseEntity.ok().body(CommonResponse.success(token));
+    public ResponseEntity<?> getUser(@AuthUser Account auth) {
+        Account account = accountService.getAccountByToken(auth);
+        return ResponseEntity.ok().body(account);
     }
-    
 
-    @PostMapping(value="/update/nickname")
+    @PostMapping(value = "/update/nickname")
     public ResponseEntity<?> updateNickname(@RequestBody Account account) {
         accountService.updateNickname(account);
-        
+
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value="/update/password")
+    @PostMapping(value = "/update/password")
     public ResponseEntity<?> updatePassword(@RequestBody Account account) {
         accountService.updatePassword(account);
-        
+
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value="/update/userInfo")
+    @PostMapping(value = "/update/userInfo")
     public ResponseEntity<?> updateUserInfo(@RequestBody Account account) {
         accountService.updateUserInfo(account);
-        
+
         return ResponseEntity.ok().build();
     }
 
 }
-
