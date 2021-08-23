@@ -83,8 +83,8 @@ export default function IdSearch(){
                         <span>가입되지 않은 이름거나, 잘못된 전화번호입니다.</span>
                     </div>
                     ) : (
-                    <div className={styles.LoginFail} >
-                        <span>{searchEmail === '' ? '' : `요청하신 이메일은 ${searchEmail} 입니다`}</span>
+                    <div className={styles.emailsend} >
+                        <span>{searchEmail === '' ? '' : `이메일은 ${searchEmail} 입니다`}</span>
                     </div>
                 )}
                 <div className={styles.LoginButton}>

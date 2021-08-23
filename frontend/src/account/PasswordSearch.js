@@ -20,12 +20,12 @@ export default function PasswordSearch(){
     const emailSend = () => {
         console.log("보내기");
         try {
+            setSendMassege(true);
             const url = `/api/account/findByNameAndEmail`;
             const account = {
                 name : accounts.name,
                 email : accounts.email
             }
-            setSendMassege(true);
             axios.post(url, account , {headers:{'Context-Type': 'application/json'}})
             .then(res => {console.log(res.data);
                 if(res.data == false){

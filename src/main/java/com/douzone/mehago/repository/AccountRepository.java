@@ -11,47 +11,21 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AccountRepository {
-    
+
     @Autowired
     private SqlSession sqlSession;
-    
-    public Account findByEmailAndPassword(String email, String password) {
-      Map<String, Object> map = new HashMap();
-		  map.put("email", email);
-		  map.put("password", password);
-		return sqlSession.selectOne("account.findByEmailAndPassword", map);
-    }
 
     public Boolean insert(Account vo) {
-		  int result = sqlSession.insert("account.insert", vo);
-		  return result == 1;
-	  }
-
-
-    public Boolean existsByEmail(String email) {
-      return sqlSession.selectOne("account.findByEmail",email);
+		int result = sqlSession.insert("account.insert", vo);
+		return result == 1;
     }
 
-    public void signUp(Account account) {
-      sqlSession.insert("account.insert", account);
-    }
-
-    public String isExistEmail(String email) {
-        return sqlSession.selectOne("account.isExistEmail",email);
-    }
-
-
-    public String isExistNickName(String nickName) {
-        return sqlSession.selectOne("account.isExistNickName", nickName);
-    }
-
-
-    public String isExistPhoneNumber(String phoneNumber) {
-        return sqlSession.selectOne("account.isExistPhoneNumber",phoneNumber);
-    }
-
-    public Account getAccount(Account account) {
-      return sqlSession.selectOne("account.findByEmailAndPassword",account);
+    public String existsData(String name, String value) {
+        Map<String, Object> map = new HashMap();
+		map.put("name", name);
+		map.put("value", value);
+        System.out.println(map);
+        return sqlSession.selectOne("account.existData", map);
     }
 
     public Account searchAccount(String name, String email){
@@ -75,12 +49,15 @@ public class AccountRepository {
       sqlSession.update("account.updateRendomPassword", map);
     }
 
+    public Account getAccount(Account account) {
+        return sqlSession.selectOne("account.findByEmailAndPassword", account);
+    }
+
     public boolean updateToken(Account account) {
         return sqlSession.update("account.updateToken", account) == 1 ? true : false;
     }
 
     public Account getAccountByToken(Account account) {
-        return sqlSession.selectOne("account.findByNo",account);
+        return sqlSession.selectOne("account.findByNo", account);
     }
-
 }

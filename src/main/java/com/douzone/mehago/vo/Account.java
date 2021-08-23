@@ -1,71 +1,40 @@
 package com.douzone.mehago.vo;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 import lombok.Data;
 
 @Data
 public class Account {
 
-    private Long no;
+	private Long no;
 
+    @NotNull
+    @Length(max = 30)
+    @Email
     private String email;
+
+    @NotNull
+    @Length(min = 8, max = 10)
     private String password;
+
+    @NotNull
+    @Length(min = 2, max = 20)
     private String nickname;
+
+    @NotNull
+    @Length(min = 2, max = 10)
     private String name;
+
+    @NotNull
+    @Length(max = 11)
     private String phoneNumber;
     private String thumbnailUrl;
-    private String token;
+    // created_at
 
-    @Override
-	public String toString() {
-		return "Account [no=" + no + ", email=" + email + ", password=" + password + ", nickname=" + nickname
-				+ ", name=" + name + ", phoneNumber=" + phoneNumber + ", thumbnailUrl=" + thumbnailUrl + ", token="+token+"]";
-	}
-	public Long getNo() {
-		return no;
-	}
-	public void setNo(Long no) {
-		this.no = no;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-	public String getThumbnailUrl() {
-		return thumbnailUrl;
-	}
-	public void setThumbnailUrl(String thumbnailUrl) {
-		this.thumbnailUrl = thumbnailUrl;
-	}
-    public String getToken() {
-		return token;
-	}
-	public void setToken(String token) {
-		this.token = token;
-	}
+    private String token;
 }

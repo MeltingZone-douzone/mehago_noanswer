@@ -12,47 +12,40 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-// 컨트롤러 메서드에서 특정 조건에 맞는 파라미터가 있을 때 원하는 값을 바인딩해주는 인터페이스
-public class AuthUserHandlerMethodArgumentResolver  implements HandlerMethodArgumentResolver{
-	/**
-	 * 스프링에서는 Controller에서 @RequestBody 어노테이션을 사용해 Request의 Body 값을 받아올 때,
-	 * @PathVariable 어노테이션을 사용해 Request 의 Path Parameter 값을 받아올 때 이 
-	 * HandlerMethodArgumentResolver를 사용해서 값을 받아옴
-	 */
+public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
+
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-		
+
 		System.out.println("AuthUserHandlerMethodArgumentResolver called");
-		
-		if(supportsParameter(parameter) == false) { // 지원안하는 파라미터이면
-			return WebArgumentResolver.UNRESOLVED;	// 사용자 요청이 Controller에 도달하기 전에 그 요청의 파라미터들을 수정할 수 있도록 해줌
+
+		if (supportsParameter(parameter) == false) { // 지원안하는 파라미터이면
+			return WebArgumentResolver.UNRESOLVED; // 어떤결과?
 		}
-		
-		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();  //  통해 클라이언트 요청이 담긴 파라미터를 컨트롤러보다 먼저 받아서 작업을 수행할 수 있다.
+
+		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 		HttpSession session = request.getSession();
-		if(session == null) {
+		if (session == null) {
 			return null;
 		}
 		return session.getAttribute("authUser"); // return해주는 타입이 argument로 박힘 authUser
 	}
-	
-	
-//	지원해주는 타입인가 판단함. ex) 어노테이션이 붙어있는 파라미터인지, type이 UserVO인가
+
+	// 지원해주는 타입인가 판단함. ex) 어노테이션이 붙어있는 파라미터인지, type이 UserVO인가
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		AuthUser authUser = parameter.getParameterAnnotation(AuthUser.class);
-		if(authUser == null) { // @authUser가 선언되어있지 않으면,
+		if (authUser == null) { // @authUser가 선언되어있지 않으면,
 			return false;
 		}
-		
-		// @authUser가 선언되어있는데 타입이 UserVO가 아니면 
-		if(parameter.getParameterType().equals(Account.class) == false) { 
-			return false;
-		}
-		
-		return true; 
-	}
 
+		// @authUser가 선언되어있는데 타입이 UserVO가 아니면
+		if (parameter.getParameterType().equals(Account.class) == false) {
+			return false;
+		}
+
+		return true;
+	}
 
 }

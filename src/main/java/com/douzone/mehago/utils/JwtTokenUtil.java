@@ -17,19 +17,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JwtTokenUtil{
+public class JwtTokenUtil {
 
     // private static final Logger log =LoggerFactory.getLogger(JwtTokenUtil.class);
-    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;            // 30분
+    private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30; // 30분
 
     @Value("${spring.jwt.secret}")
     private String secretKey;
 
     @Value("${spring.jwt.issuer}")
-    private String issuer;
+    private String issuer;  // 토큰 발급자
 
     @PostConstruct // 주입 받은뒤 실행하는 초기화
-    protected void init(){
+    protected void init() {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
@@ -38,9 +38,9 @@ public class JwtTokenUtil{
         try {
             token = JWT.create()
                         .withIssuer(issuer)
-                        .withClaim("userNo", account.getNo())
-                        .withClaim("userNickname", account.getNickname())
-                        .withExpiresAt(new Date(System.currentTimeMillis()+ACCESS_TOKEN_EXPIRE_TIME))
+                        .withClaim("userNo", account.getNo()) // 비공개 클레임
+                        .withClaim("userNickname", account.getNickname()) // 비공개 클레임
+                        .withExpiresAt(new Date(System.currentTimeMillis() + ACCESS_TOKEN_EXPIRE_TIME))
                         .sign(generateAlgorithm());
 
         } catch (JWTCreationException exception){
@@ -59,4 +59,4 @@ public class JwtTokenUtil{
     private Algorithm generateAlgorithm() throws UnsupportedEncodingException{
         return Algorithm.HMAC256(secretKey);
     }
-}
+} 

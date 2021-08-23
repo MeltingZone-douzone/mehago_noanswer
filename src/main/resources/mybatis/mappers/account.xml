@@ -5,58 +5,49 @@
 
 <mapper namespace="account">
 
-	<select id="findByEmailAndPassword" parameterType="map" resultType="account">
-		<![CDATA[
-			SELECT 
-				no, name
-			FROM 
-				account 
-			WHERE email = #{email} AND password = #{password}
-		]]>
-	</select>
 
 	<insert id="insert" parameterType="account">
 		<![CDATA[
 			insert 
 				into account 
-				values(null,#{email},#{password},#{nickname},#{phoneNumber},#{name},#{thumbnailUrl}, now());
+				values(null, #{email}, #{password}, #{nickname}, #{phoneNumber}, #{name}, null, now(),null);
 		]]>
 	</insert>
 
-	<select id="isExistEmail" parameterType="string" resultType="String">
-		<![CDATA[
-			select 
-				email
-			from 
-				account
-			where 
-				email = #{email}
-		]]>
+	<select id="existData" parameterType="Map" resultType="String">
+		<choose>
+			<when test='name == "email"'>
+				<![CDATA[
+					select 
+						email
+					from 
+						account
+					where 
+						email = #{value}
+				]]>
+			</when>
+			<when test='name == "nickname"'>
+				<![CDATA[
+					select 
+						nickname
+					from 
+						account
+					where 
+						nickname = #{value}
+				]]>
+			</when>
+			<when test='name == "phone_number"'>
+				<![CDATA[
+					select 
+						phone_number
+					from 
+						account
+					where 
+						phone_number = #{value}
+				]]>
+			</when>
+		</choose>
 	</select>
-
-	<select id="isExistNickName" parameterType="string" resultType="String">
-		<![CDATA[
-			select 
-				nickName
-			from 
-				account
-			where 
-				nickName = #{nickName}
-		]]>
-	</select>
-
-	<select id="isExistPhoneNumber" parameterType="string" resultType="String">
-		<![CDATA[
-			select 
-				phone_number
-			from 
-				account
-			where 
-				phone_number = #{phone_number}
-		]]>
-	</select>
-
-
 
 	<update id="update" parameterType="account">
 		<choose>
@@ -80,6 +71,8 @@
 		</choose>
 	</update>
 
+
+<!-- $ 바꾸기 -->
 	<update id="updateNickname" parameterType="account">
 		<![CDATA[
 		    update account
@@ -105,7 +98,17 @@
 		]]>
 	</update>
 
-	<select id="searchAccount" parameterType="map"
+	<select id="findByEmailAndPassword" parameterType="account"
+      resultType="account">
+      <![CDATA[
+      select no, email, nickname
+        from account 
+       where email = #{email } 
+         and password = #{password } 
+         ]]>
+   </select>
+   
+		<select id="searchAccount" parameterType="map"
 		resultType="account">
 		<![CDATA[
 			select email, password
@@ -150,5 +153,4 @@
 		 where no = #{no } 
 		   ]]>
 	</select>
-
 </mapper>

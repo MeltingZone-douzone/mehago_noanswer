@@ -10,9 +10,10 @@ export default function ProfileSettingsPage({match}) {
     const [userInfo, setUserInfo] = useState({nickname:"noNickname", name:"hong", telephoneNum:"01022221234" , thumbnailUrl:"" });
 
     useEffect(() =>{
-        // Todo 유저 정보가져오기.
+        // TODO: 유저 정보가져오기.
         console.log(getUserInfo());
     },[])
+
 
     return(
         <Template>

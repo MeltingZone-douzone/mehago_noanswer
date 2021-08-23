@@ -1,8 +1,6 @@
 package com.douzone.mehago.dto;
 
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter @Getter
