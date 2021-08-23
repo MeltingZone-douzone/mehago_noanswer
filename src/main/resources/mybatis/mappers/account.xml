@@ -5,6 +5,16 @@
 
 <mapper namespace="account">
 
+	<select id="findByEmailAndPassword" parameterType="account" resultType="account">
+		<![CDATA[
+			SELECT 
+				no, name
+			FROM 
+				account 
+			WHERE email = #{email} AND password = #{password}
+		]]>
+	</select>
+
 	<insert id="insert" parameterType="account">
 		<![CDATA[
 			insert 
@@ -13,13 +23,62 @@
 		]]>
 	</insert>
 
-	<select id="findById" parameterType="Long" resultType="account">
+	<select id="isExistEmail" parameterType="string" resultType="String">
 		<![CDATA[
-			select id, email, name, gender
-				from account
-				where id = #{id}
+			select 
+				email
+			from 
+				account
+			where 
+				email = #{email}
 		]]>
 	</select>
+
+	<select id="isExistNickName" parameterType="string" resultType="String">
+		<![CDATA[
+			select 
+				nickName
+			from 
+				account
+			where 
+				nickName = #{nickName}
+		]]>
+	</select>
+
+	<select id="isExistPhoneNumber" parameterType="string" resultType="String">
+		<![CDATA[
+			select 
+				phone_number
+			from 
+				account
+			where 
+				phone_number = #{phone_number}
+		]]>
+	</select>
+
+
+
+	<update id="update" parameterType="account">
+		<choose>
+			<when test='password == ""'>
+				<![CDATA[
+				update account
+			       set name=#{name },
+			           gender=#{gender }
+			     where id=${id }
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				update account
+				   set name=#{name },
+				       password=#{password }, 
+				       gender=#{gender }
+				 where id=${id }	
+				]]>
+			</otherwise>
+		</choose>
+	</update>
 
 	<update id="updateNickname" parameterType="account">
 		<![CDATA[
@@ -46,13 +105,50 @@
 		]]>
 	</update>
 
-	<select id="findByEmailAndPassword" parameterType="account"
+	<select id="searchAccount" parameterType="map"
 		resultType="account">
 		<![CDATA[
-		select no, email, nickname
+			select email, password
+				from account 
+				where name = #{name} 
+				and email = #{email}
+		]]>
+	</select>
+
+	<select id="searchEmail" parameterType="map"
+		resultType="account">
+		<![CDATA[
+			select email
+				from account 
+				where name = #{name} 
+				and phone_number = #{phoneNumber}
+		]]>
+	</select>
+
+	<update id="updateRendomPassword" parameterType="map">
+		<![CDATA[
+			update account
+			    set password=#{randomPassword }
+			    where email=#{email }
+		]]>
+	</update>
+
+	
+
+	<update id="updateToken" parameterType="account">
+		<![CDATA[
+				update account 
+				set token= #{token}
+				where no = #{no}
+		  ]]>
+	</update>
+
+	<select id="findByNo" parameterType="account"
+		resultType="account">
+		<![CDATA[
+		select no, email, nickname, phone_number, thumbnail_url
 		  from account 
-		 where email = #{email } 
-		   and password = #{password } 
+		 where no = #{no } 
 		   ]]>
 	</select>
 </mapper>

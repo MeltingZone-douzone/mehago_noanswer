@@ -9,7 +9,9 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+
   messages:
+    always-messages-format: true
     basename: messages/messages_ko
     encoding: UTF-8
   servlet:
@@ -23,46 +25,45 @@ spring:
 ---
 # dev profile - spring boot configuration
 spring:
-   config:
-      activate:
-         on-profile: dev
-   devtools:
-      livereload:
-         enabled: true
-   datasource:
-      driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/mehago?characterEncoding=utf8
-      username: root
-      password: asd003786
-   jwt:
-      secret: PeAChHOng
-      issuer: Mehago
-    
----
-# production profile - spring boot configuration
-spring:
   config:
     activate:
-      on-profile: production
+      on-profile: dev
+  devtools:
+    livereload:
+      enabled: true
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mysql://192.168.80.112:3307/mehago?characterEncoding=utf8
     username: mehago
     password: mehago
+  jwt:
+    secret: PeAChHOng
+    issuer: Mehago
+
+---
+# production profile - spring boot configuration
+spring:
+  profiles: production
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://192.168.80.112:3307/mehago?characterEncoding=utf8
+    username: mehago
+    password: mehago
+    initialSize: 10
+    maxActive: 100
+
 ---
 # server
 server:
   port: 8080
   servlet:
-    encoding:
-      charset: UTF-8
-      enabled: true
 
 ---
 #mybatis
 mybatis:
   config-location: classpath:mybatis/configuration.xml
-#---
+
+---
 #logging
-# logging:
+#logging:
 #   config: classpath:logback.xml

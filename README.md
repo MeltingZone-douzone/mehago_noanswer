@@ -20,7 +20,7 @@ spring-boot run (backend 나중에 추가해야됨 npm run dev:backend)
 $ npm run dev
 ```
 
-frontend와 통신
+springboot와 통신
 경로 : /api
 
 backend와 통신
@@ -45,6 +45,11 @@ backend와 통신
             |               |       |--- AccountService.java
             |               |--- /vo
             |               |       |--- Account.java
+            |               |--- /utils
+            |               |       |--- AES.java
+            |               |       |--- InvaildJwtException.java
+            |               |       |--- JwtDecoder.java
+            |               |       |--- JwtTokenUtil.java
             |               |--- MehagoApplication.java
             |--- /resource
                     |--- /mybatis
@@ -54,7 +59,7 @@ backend와 통신
                     |--- application.yml
 </pre>
 
-ResponseEntity
+JWT <https://github.com/MeltingZone-douzone/mehago/tree/main/docs/jwt/>
 
 #### frontend
 

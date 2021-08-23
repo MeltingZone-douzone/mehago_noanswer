@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import styles from "../assets/sass/account/LoginForm.scss";
+import localStoryge from 'local-storage';
 import axios from "axios";
 import localStorage from "local-storage";
 
 import NonMembers from "../components/NonMember";
 
-export default function LoginForm() {
+export default function LoginForm({history}) {
   const [memberVo, setMemberVo] = useState({ email: "", password: "" });
   const [loginFail, setLoginFail] = useState(false);
 
@@ -22,19 +23,24 @@ export default function LoginForm() {
           },
         })
         .then((res) => {
+          console.log(res);
           if (res.statusText === "OK") {
             if (res.data === "cant find Account") {
               // 틀렸을 경우에
               setLoginFail(true);
               setMemberVo({ ...memberVo, password: "" });
+              return;
             } // 성공하면 메인화면 가기
             localStorage.set("token", res.data);
+            history.push("/");
           }
         });
     } catch (err) {
       console.error(err);
     }
   };
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
@@ -49,6 +55,7 @@ export default function LoginForm() {
           <span>로그인을 통해 mehago를 이용해 보세요.</span>
         </div>
       </div>
+
       <form onSubmit={login}>
         <div className={styles.Id}>
           <TextField
