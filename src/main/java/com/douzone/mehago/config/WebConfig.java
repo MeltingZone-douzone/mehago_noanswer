@@ -5,6 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 
+import com.douzone.mehago.security.AuthInterceptor;
+import com.douzone.mehago.security.AuthUserHandlerMethodArgumentResolver;
+import com.douzone.mehago.security.LoginInterceptor;
+import com.douzone.mehago.security.LogoutInterceptor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -18,13 +23,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.douzone.mehago.security.AuthInterceptor;
-import com.douzone.mehago.security.AuthUserHandlerMethodArgumentResolver;
-import com.douzone.mehago.security.LoginInterceptor;
-import com.douzone.mehago.security.LogoutInterceptor;
 
 @SpringBootConfiguration
 @PropertySource("classpath:/com/douzone/mehago/config/WebConfig.properties")

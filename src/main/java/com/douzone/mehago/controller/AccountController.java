@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.crypto.spec.SecretKeySpec;
+import javax.validation.Valid;
 
 import org.apache.tomcat.util.net.openssl.ciphers.Encryption;
 
@@ -39,8 +40,7 @@ public class AccountController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signUp(@RequestBody Account account) {
-        System.out.println("아아 여기는 부트");
+    public ResponseEntity<?> signUp(@RequestBody @Valid Account account) {
         System.out.println(account);
         Boolean result = accountService.signUp(account);
         System.out.println(result);
@@ -49,10 +49,7 @@ public class AccountController {
 
     @PostMapping("/signup/valid-{name}")
     public ResponseEntity<?> validateAccount(@PathVariable String name, @RequestBody String value) {
-        System.out.println(" name, value는 "+ name + " : " + value);
-        String data = accountService.isExist(name, value);
-        System.out.println(" name, data는 "+ name + " : " + data);
-        // return ResponseEntity.ok().build();
+        String data = accountService.existsData(name, value);
         return ResponseEntity.ok().body(data != null ? data : "null");
     }
 

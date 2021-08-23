@@ -25,20 +25,13 @@ public class AccountRepository {
     public Boolean insert(Account vo) {
 		int result = sqlSession.insert("account.insert", vo);
 		return result == 1;
-	  }
-
-    public String isExistEmail(String email) {
-        return sqlSession.selectOne("account.isExistEmail",email);
     }
 
-
-    public String isExistNickname(String nickname) {
-        return sqlSession.selectOne("account.isExistNickname", nickname);
-    }
-
-
-    public String isExistPhoneNumber(String phoneNumber) {
-        return sqlSession.selectOne("account.isExistPhoneNumber",phoneNumber);
+    public String existsData(String name, String value) {
+        Map<String, Object> map = new HashMap();
+		map.put("name", name);
+		map.put("value", value);
+        return sqlSession.selectOne("account.existData", map);
     }
 
     public boolean updateNickname(Account account) {

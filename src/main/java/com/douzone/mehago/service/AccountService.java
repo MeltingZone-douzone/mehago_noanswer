@@ -20,25 +20,8 @@ public class AccountService {
         return accountRepository.insert(account);
     }
 
-    public String isExist(String name, String value) {
-        String result = "";
-        switch (name) {
-            case "email":
-                result = accountRepository.isExistEmail(value);
-                System.out.println("email result는 "+ result);
-            break;
-
-            case "nickname":
-                result = accountRepository.isExistNickname(value);
-                System.out.println("nickname result는 "+ result);
-            break;
-
-            case "phoneNumber":
-                result = accountRepository.isExistPhoneNumber(value);
-                System.out.println("phoneNumber result는 "+ result);
-            break;
-        }
-        return result;
+    public String existsData(String name, String value) {
+        return accountRepository.existsData("phoneNumber".equals(name) ? "phone_number" : name, value);
     }
     public void updateNickname(Account account) {
 

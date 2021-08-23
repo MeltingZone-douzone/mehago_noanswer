@@ -20,9 +20,9 @@ export default function SignUpForm() {
       )
       .then(response => {
           if(response.data !== null) {  // 이미 있을 경우
-            console.log(`이미 있는 ${name} : ${response.data}`);
+            console.log(`이미 ${name} : ${response.data} 가 있음`);
             setValidation({...validation, [name]: false })
-            setErrorMessage({...errorMessage, [name]: `이미 가입한 ${name} 입니다.` })
+            setErrorMessage({...errorMessage, [name]: `이미 가입한 ${name} 입니다.` }) // label props해서 여기서도?
             return false;
           }
           console.log(response.data, ' 사용가능함'); // null 이면 사용가능한 이메일
@@ -31,7 +31,7 @@ export default function SignUpForm() {
   }
 
   const validate = {
-    email: function(e) {
+    email: function(e) { // DB중복, 유효성 체크
       if(e.target.value === '') {
         setValidation({ ...validation, [e.target.name]: false })
         return false;
@@ -46,7 +46,7 @@ export default function SignUpForm() {
       }
       console.log(validation);
     },
-    password: function(e)  {
+    password: function(e)  { // 유효성 체크
       if(e.target.value === '') {
         setValidation({ ...validation, [e.target.name]: false })
         return false;
@@ -61,13 +61,13 @@ export default function SignUpForm() {
       }
       console.log(validation);
     },
-    name: function(e)  { 
+    name: function(e)  { // 유효성 체크
       if(e.target.value === '') {
         setValidation({ ...validation, [e.target.name]: false })
         return false;
       }
       console.log(e.target.value);
-      const regExp = /^[가-힣]{2,10}$/  //  2~10글자 한글 영문
+      const regExp = /^[가-힣]{2,10}$/  //  2~10글자 한글
       if(regExp.test(e.target.value)) {
         setValidation({...validation, [e.target.name]: true })
       } else {
@@ -76,7 +76,7 @@ export default function SignUpForm() {
       }
       console.log(validation);
     },
-    nickname: function(e) { // 특수문자 제외
+    nickname: function(e) { // 유효성 체크 // 특수문자 제외
       if(e.target.value === '') {
         setValidation({ ...validation, [e.target.name]: false })
         return false;
@@ -91,7 +91,7 @@ export default function SignUpForm() {
       }
       console.log(validation);
     },
-    phoneNumber: function(e)  {
+    phoneNumber: function(e)  { // DB중복, 유효성 체크
       if(e.target.value === '') {
         setValidation({ ...validation, [e.target.name]: false })
         return false;
