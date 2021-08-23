@@ -5,15 +5,7 @@
 
 <mapper namespace="account">
 
-	<select id="findByEmailAndPassword" parameterType="map" resultType="account">
-		<![CDATA[
-			SELECT 
-				no, name
-			FROM 
-				account 
-			WHERE email = #{email} AND password = #{password}
-		]]>
-	</select>
+
 
 	<insert id="insert" parameterType="account">
 		<![CDATA[
@@ -106,6 +98,16 @@
 		    where id=${id }
 		]]>
 	</update>
+
+	<select id="findByEmailAndPassword" parameterType="account"
+		resultType="account">
+		<![CDATA[
+		select no, email, nickname
+		  from account 
+		 where email = #{email } 
+		   and password = #{password } 
+		   ]]>
+	</select>
 
 	<update id="updateToken" parameterType="account">
 		<![CDATA[

@@ -11,16 +11,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AccountRepository {
-    
+
     @Autowired
     private SqlSession sqlSession;
-    
-    public Account findByEmailAndPassword(String email, String password) {
-        Map<String, Object> map = new HashMap();
-		map.put("email", email);
-		map.put("password", password);
-		return sqlSession.selectOne("account.findByEmailAndPassword", map);
-    }
 
     public Boolean insert(Account vo) {
 		int result = sqlSession.insert("account.insert", vo);
@@ -51,8 +44,9 @@ public class AccountRepository {
         sqlSession.insert("account.insert", account);
 
     }
+
     public Account getAccount(Account account) {
-        return sqlSession.selectOne("account.findByEmailAndPassword",account);
+        return sqlSession.selectOne("account.findByEmailAndPassword", account);
     }
 
     public boolean updateToken(Account account) {

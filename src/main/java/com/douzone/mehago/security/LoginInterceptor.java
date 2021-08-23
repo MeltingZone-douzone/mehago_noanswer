@@ -13,10 +13,12 @@ import com.douzone.mehago.utils.JwtTokenUtil;
 import com.douzone.mehago.vo.Account;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class LoginInterceptor extends HandlerInterceptorAdapter{
-	
+public class LoginInterceptor extends HandlerInterceptorAdapter {
+
 	@Autowired
 	private AccountService accountService;
 	@Autowired
@@ -71,5 +73,4 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		response.getWriter().write(token);
 		return false;
 	}
-
 }

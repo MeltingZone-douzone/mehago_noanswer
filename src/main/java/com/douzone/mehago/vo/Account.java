@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class Account {
 
-    private Long no;
+	private Long no;
 
     @NotNull
     @Length(max = 30)

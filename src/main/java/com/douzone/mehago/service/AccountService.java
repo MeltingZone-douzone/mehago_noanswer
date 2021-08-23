@@ -8,13 +8,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AccountService {
-    
+
     @Autowired
     private AccountRepository accountRepository;
-
-    public Account getAccount(String email,String password) {
-        return accountRepository.findByEmailAndPassword(email, password);
-    }
 
     public boolean signUp(Account account) {
         return accountRepository.insert(account);
@@ -23,24 +19,20 @@ public class AccountService {
     public String existsData(String name, String value) {
         return accountRepository.existsData("phoneNumber".equals(name) ? "phone_number" : name, value);
     }
+
     public void updateNickname(Account account) {
 
-        
     }
 
-    
     public void updatePassword(Account account) {
-        
-        
-        
+
     }
 
     public void updateUserInfo(Account account) {
-        
-        
+
     }
 
-    public Account getAccount(Account account){
+    public Account getAccount(Account account) {
         return accountRepository.getAccount(account);
     }  
 

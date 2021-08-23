@@ -2,10 +2,10 @@ package com.douzone.mehago.controller;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.validation.Valid;
+
 import com.douzone.mehago.dto.CommonResponse;
-import com.douzone.mehago.security.Auth;
 import com.douzone.mehago.service.AccountService;
-import com.douzone.mehago.utils.AES;
 import com.douzone.mehago.utils.JwtDecoder;
 import com.douzone.mehago.utils.JwtTokenUtil;
 import com.douzone.mehago.vo.Account;
@@ -18,29 +18,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import javax.crypto.spec.SecretKeySpec;
-import javax.validation.Valid;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Encryption;
-
-import lombok.RequiredArgsConstructor;
-
-
-@RequiredArgsConstructor  // TODO 이게 머지
 @RequestMapping("/api/account")
 @Controller
 public class AccountController {
-    private final JwtTokenUtil jwtTokenUtil;
-    private final JwtDecoder jwtDecoder;
-    private final AccountService accountService;
 
-    @Auth
-    @GetMapping("/test")
-    @ResponseBody
-    public String test() {
-        return "hi";
-    }
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
+    @Autowired
+    private JwtDecoder jwtDecoder;
+    @Autowired
+    private AccountService accountService;
 
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@RequestBody @Valid Account account) {
@@ -57,7 +45,6 @@ public class AccountController {
         return ResponseEntity.ok().body(data != null ? data : "null");
     }
 
-    // 암호화 테스트용.. localhost:9999/profile하면 볼 수 있음.
     @GetMapping("/get-user")
     public ResponseEntity<?> getUser() {
         // String secretKey = "Peach";
@@ -87,27 +74,25 @@ public class AccountController {
 
         return ResponseEntity.ok().body(CommonResponse.success(token));
     }
-    
 
-    @PostMapping(value="/update/nickname")
+    @PostMapping(value = "/update/nickname")
     public ResponseEntity<?> updateNickname(@RequestBody Account account) {
         accountService.updateNickname(account);
-        
+
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value="/update/password")
+    @PostMapping(value = "/update/password")
     public ResponseEntity<?> updatePassword(@RequestBody Account account) {
         accountService.updatePassword(account);
-        
+
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(value="/update/userInfo")
+    @PostMapping(value = "/update/userInfo")
     public ResponseEntity<?> updateUserInfo(@RequestBody Account account) {
         accountService.updateUserInfo(account);
-        
+
         return ResponseEntity.ok().build();
     }
-
 }

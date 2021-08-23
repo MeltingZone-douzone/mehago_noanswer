@@ -5,8 +5,9 @@ import FullColorButton from '../../assets/styles/FullColorButton';
 
 import AccountSettings from './AccountSettings';
 import UserInfoSettings from './UserInfoSettings';
-export default function UserSettingsTemplate({user}) {
+export default function UserSettingsTemplate(props) {
 
+    console.log(props);
 
     return(
         <SettingsTemplate>

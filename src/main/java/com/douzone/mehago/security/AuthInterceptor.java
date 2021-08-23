@@ -51,8 +51,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 			return true;
 		}
 
-		// 6. @Auth가 붙어있기 때문에 인증(Authenfication) 여부 확인
-
+		
 		if (request.getHeader("Authorization") == null) {
 			response.getWriter().write("cant find Account");
 			return false;
@@ -65,16 +64,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 		Account account = accountService.getAccountByToken(decodeAccount);
 		System.out.println(account.toString());
 
-		///////////////////////////////////////////////////////////////////
-
-		// 7. 권한(Authorization) 체크를 위해서 @Auth의 role 가져오기 ("ADMIN", "USER")
-
-		String role = auth.user().toString();
-
+				
 		// 8. 인터셉터 통과 후 메서드 실행
-		// 옳은 관리자 권한
-		// @Auth의 role: "ADMIN"
-		// authUser의 role: "ADMIN"
 		return true;
 	}
 }
