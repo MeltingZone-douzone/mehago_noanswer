@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { createTheme, makeStyles, StylesProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -13,6 +13,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
+
+import ChatLayout from './ChatLayout';
+
+// https://stackoverflow.com/questions/58829254/how-to-override-muitypography-body1-class-in-material-ui
 
 const useStyles = makeStyles({
   table: {
@@ -31,8 +35,14 @@ const useStyles = makeStyles({
   messageArea: {
     height: '70vh',
     overflowY: 'auto'
-  }
+  },
 });
+
+/* 
+    사용자
+    DB 검색 후 채팅 띄워주기
+    
+*/
 
 const Chat = () => {
   const classes = useStyles();
@@ -46,6 +56,8 @@ const Chat = () => {
         </Grid>
         <Grid container component={Paper} className={classes.chatSection}>
             <Grid item xs={3} className={classes.borderRight500}>
+                
+                {/* 내 정보 */}
                 <List>
                     <ListItem button key="RemySharp">
                         <ListItemIcon>
@@ -55,6 +67,9 @@ const Chat = () => {
                     </ListItem>
                 </List>
                 <Divider />
+
+                
+                {/* 접속자 검색 */}
                 <Grid item xs={12} style={{padding: '10px'}}>
                     <TextField id="outlined-basic-email" label="Search" variant="outlined" fullWidth />
                 </Grid>
@@ -86,6 +101,8 @@ const Chat = () => {
             </Grid>
             <Grid item xs={9}>
                 {/* 
+                    채팅내용
+
                     ListItemText 
                         align=
                             right는 나 
@@ -97,11 +114,13 @@ const Chat = () => {
                 */}
                 <List className={classes.messageArea}>
 
+                    {/* <ChatLayout /> */}
                     <ListItem key="1">
                         <Grid container>
                             <Grid item xs={12}>
                                 <ListItemText align="right" primary="Hey man, What's up ?"></ListItemText>
                             </Grid>
+                            
                             <Grid item xs={12}>
                                 <ListItemText align="right" secondary="09:30"></ListItemText>
                             </Grid>
@@ -125,15 +144,17 @@ const Chat = () => {
                                 <ListItemText align="right" primary="Cool. i am good, let's catch up!"></ListItemText>
                             </Grid>
                             <Grid item xs={12}>
-                                <ListItemText align="right" secondary="10:30"></ListItemText>
+                                <ListItemText align="right" secondary="10:30"><ListItemText align="right" secondary="1"></ListItemText></ListItemText>
                             </Grid>
                         </Grid>
                     </ListItem>
                 </List>
                 <Divider />
+
+                {/* 채팅 입력란 */}
                 <Grid container style={{padding: '20px'}}>
                     <Grid item xs={11}>
-                        <TextField id="outlined-basic-email" label="Type Something" fullWidth />
+                        <TextField id="outlined-basic-email" label="빨리 입력해라.." fullWidth />
                     </Grid>
                     <Grid xs={1} align="right">
                         <Fab color="primary" aria-label="add"><SendIcon /></Fab>

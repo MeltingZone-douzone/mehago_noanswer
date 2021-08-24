@@ -1,0 +1,106 @@
+2021-08-24 11:03:33 error: ReferenceError: req is not defined
+    at error404 (Y:\mehago\backend\routes\error.js:5:9)
+    at Layer.handle [as handle_request] (Y:\mehago\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (Y:\mehago\backend\node_modules\express\lib\router\index.js:317:13)
+    at Y:\mehago\backend\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (Y:\mehago\backend\node_modules\express\lib\router\index.js:335:12)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\index.js:275:10)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:127:14)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:131:14)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:131:14)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:131:14)
+2021-08-24 11:03:40 error: ReferenceError: req is not defined
+    at error404 (Y:\mehago\backend\routes\error.js:5:9)
+    at Layer.handle [as handle_request] (Y:\mehago\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (Y:\mehago\backend\node_modules\express\lib\router\index.js:317:13)
+    at Y:\mehago\backend\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (Y:\mehago\backend\node_modules\express\lib\router\index.js:335:12)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\index.js:275:10)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:127:14)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:131:14)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:131:14)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:131:14)
+2021-08-24 11:05:59 error: Error: No default engine was specified and no extension was provided.
+    at new View (Y:\mehago\backend\node_modules\express\lib\view.js:61:11)
+    at Function.render (Y:\mehago\backend\node_modules\express\lib\application.js:570:12)
+    at ServerResponse.render (Y:\mehago\backend\node_modules\express\lib\response.js:1012:7)
+    at error404 (Y:\mehago\backend\routes\error.js:6:29)
+    at Layer.handle [as handle_request] (Y:\mehago\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (Y:\mehago\backend\node_modules\express\lib\router\index.js:317:13)
+    at Y:\mehago\backend\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (Y:\mehago\backend\node_modules\express\lib\router\index.js:335:12)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\index.js:275:10)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:127:14)
+2021-08-24 11:07:36 error: Error: No default engine was specified and no extension was provided.
+    at new View (Y:\mehago\backend\node_modules\express\lib\view.js:61:11)
+    at Function.render (Y:\mehago\backend\node_modules\express\lib\application.js:570:12)
+    at ServerResponse.render (Y:\mehago\backend\node_modules\express\lib\response.js:1012:7)
+    at error404 (Y:\mehago\backend\routes\error.js:6:29)
+    at Layer.handle [as handle_request] (Y:\mehago\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (Y:\mehago\backend\node_modules\express\lib\router\index.js:317:13)
+    at Y:\mehago\backend\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (Y:\mehago\backend\node_modules\express\lib\router\index.js:335:12)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\index.js:275:10)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:127:14)
+2021-08-24 11:07:56 error: Error: No default engine was specified and no extension was provided.
+    at new View (Y:\mehago\backend\node_modules\express\lib\view.js:61:11)
+    at Function.render (Y:\mehago\backend\node_modules\express\lib\application.js:570:12)
+    at ServerResponse.render (Y:\mehago\backend\node_modules\express\lib\response.js:1012:7)
+    at error404 (Y:\mehago\backend\routes\error.js:6:29)
+    at Layer.handle [as handle_request] (Y:\mehago\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (Y:\mehago\backend\node_modules\express\lib\router\index.js:317:13)
+    at Y:\mehago\backend\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (Y:\mehago\backend\node_modules\express\lib\router\index.js:335:12)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\index.js:275:10)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:127:14)
+2021-08-24 11:07:57 error: Error: No default engine was specified and no extension was provided.
+    at new View (Y:\mehago\backend\node_modules\express\lib\view.js:61:11)
+    at Function.render (Y:\mehago\backend\node_modules\express\lib\application.js:570:12)
+    at ServerResponse.render (Y:\mehago\backend\node_modules\express\lib\response.js:1012:7)
+    at error404 (Y:\mehago\backend\routes\error.js:6:29)
+    at Layer.handle [as handle_request] (Y:\mehago\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (Y:\mehago\backend\node_modules\express\lib\router\index.js:317:13)
+    at Y:\mehago\backend\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (Y:\mehago\backend\node_modules\express\lib\router\index.js:335:12)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\index.js:275:10)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:127:14)
+2021-08-24 11:08:11 error: Error: No default engine was specified and no extension was provided.
+    at new View (Y:\mehago\backend\node_modules\express\lib\view.js:61:11)
+    at Function.render (Y:\mehago\backend\node_modules\express\lib\application.js:570:12)
+    at ServerResponse.render (Y:\mehago\backend\node_modules\express\lib\response.js:1012:7)
+    at error404 (Y:\mehago\backend\routes\error.js:6:29)
+    at Layer.handle [as handle_request] (Y:\mehago\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (Y:\mehago\backend\node_modules\express\lib\router\index.js:317:13)
+    at Y:\mehago\backend\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (Y:\mehago\backend\node_modules\express\lib\router\index.js:335:12)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\index.js:275:10)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:127:14)
+2021-08-24 11:08:57 error: Error: Cannot find module 'html'
+Require stack:
+- Y:\mehago\backend\node_modules\express\lib\view.js
+- Y:\mehago\backend\node_modules\express\lib\application.js
+- Y:\mehago\backend\node_modules\express\lib\express.js
+- Y:\mehago\backend\node_modules\express\index.js
+- Y:\mehago\backend\index.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:902:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:746:27)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:92:18)
+    at new View (Y:\mehago\backend\node_modules\express\lib\view.js:81:14)
+    at Function.render (Y:\mehago\backend\node_modules\express\lib\application.js:570:12)
+    at ServerResponse.render (Y:\mehago\backend\node_modules\express\lib\response.js:1012:7)
+    at error404 (Y:\mehago\backend\routes\error.js:6:29)
+    at Layer.handle [as handle_request] (Y:\mehago\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (Y:\mehago\backend\node_modules\express\lib\router\index.js:317:13)
+2021-08-24 11:11:17 error: Error: ENOENT: no such file or directory, stat 'Y:\mehago\backend\routes\views\error\404.html'
+2021-08-24 14:50:07 error: TypeError: io.adapter is not a function
+    at module.exports (Y:\mehago\backend\routes\chat.js:19:8)
+    at Layer.handle [as handle_request] (Y:\mehago\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (Y:\mehago\backend\node_modules\express\lib\router\index.js:317:13)
+    at Y:\mehago\backend\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (Y:\mehago\backend\node_modules\express\lib\router\index.js:335:12)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\index.js:275:10)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:127:14)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:131:14)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:131:14)
+    at next (Y:\mehago\backend\node_modules\express\lib\router\route.js:131:14)

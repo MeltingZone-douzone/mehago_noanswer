@@ -1,0 +1,14 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "Y:\\mehago\\backend\\public\\.73e0bbbc53502eabaff9852b445edbae04710564-audit.json",
+    "files": [
+        {
+            "date": 1629770491268,
+            "name": "Y:\\mehago\\backend\\public\\2021-08-24.log",
+            "hash": "008c9f04c53bb91186c0dee8938ac3d3"
+        }
+    ]
+}

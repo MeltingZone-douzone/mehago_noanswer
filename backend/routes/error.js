@@ -1,9 +1,11 @@
 const logger = require("../logging");
+const path = require('path')
 
 module.exports = {
-    error404: (res) => {
+    error404: (req, res) => {
         if(req.accepts("html")){
-            res.status(404).render("error/404")
+            // res.status(404).render("error/404")
+            res.sendFile(path.join(__dirname, "../views/error/404.html"))
             return;
         }
 
@@ -21,7 +23,8 @@ module.exports = {
 
         // 응답
         if(req.accepts("html")) {
-            res.status(500).render("error/500", {
+            // res.status(500).render("error/500", {
+                res.sendFile(path.join(__dirname, "../views/error/404.html"), {
                 error: error.stack
             }); 
             // res.status(500).send(`<pre>${error.stack}</pre>`); // 개발시 편함을 위함

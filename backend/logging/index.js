@@ -7,7 +7,8 @@ const path = require('path');
 
 const { combine, timestamp, printf } = winston.format;
 
-const logDirectory = path.join(path.dirname(require.main.filename), process.env.LOG_LOCATION);
+// const logDirectory = path.join(path.dirname(require.main.filename), process.env.LOG_LOCATION);
+const logDirectory = path.join(path.dirname(require.main.filename), "public");
 const logFormat = printf(log => `${log.timestamp} ${log.level}: ${log.message}`);
 
 const logger = winston.createLogger({

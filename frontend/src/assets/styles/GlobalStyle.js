@@ -22,6 +22,13 @@ const GlobalStyle = createGlobalStyle`
         outline: none;
         padding-left: 10px;
     }
+
+    .right {
+        justify-content: flex-end !important;
+      }
+      .left {
+        justify-content: flex-start !important;
+      }
 `;
 
 export default GlobalStyle;

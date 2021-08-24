@@ -5,6 +5,7 @@ import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-d
 import ProfileSettingsPage from './pages/ProfileSettingsPage';
 import AccountPage from './pages/AccountPage';
 import ChatPage from './pages/ChatPage';
+import ChatEx from './pages/ChatEx';
 
 
 
@@ -20,6 +21,7 @@ export default function MainRouter() {
                         <Route path="/profile"  component={ProfileSettingsPage}/>
                         <Route path="/account" component={AccountPage}/>
                         <Route path="/c" component={ChatPage}/>
+                        <Route path="/e" component={ChatEx}/>
                     </Switch>
                 </WebPage>
             </Fragment>
